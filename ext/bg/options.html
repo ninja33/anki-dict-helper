@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Yomichan英汉词典版选项</title>
+        <link rel="stylesheet" type="text/css" href="../lib/bootstrap-3.3.6-dist/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="../lib/bootstrap-3.3.6-dist/css/bootstrap-theme.min.css">
+        <style>
+            .options-anki {
+                display: none;
+            }
+
+            .tab-content {
+                border-bottom: 1px #ddd solid;
+                border-left: 1px #ddd solid;
+                border-right: 1px #ddd solid;
+                padding: 10px;
+            }
+
+            .error-dlg {
+                display: none;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="options-general">
+                <h3>通用选项</h3>
+
+                <form class="form-horizontal">
+                    <div class="form-group" style="display: none">
+                        <label for="scan-length" class="control-label col-sm-2">Scan length</label>
+                        <div class="col-sm-10"><input type="number" min="1" id="scan-length" class="form-control"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <div class="checkbox">
+                                <label class="control-label"><input type="checkbox" id="activate-on-startup"> 启动时激活插件</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group" style="display: none">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <div class="checkbox">
+                                <label class="control-label"><input type="checkbox" id="load-enamdict"> Load <a href="http://www.edrdg.org/enamdict/enamdict_doc.html">ENAMDICT</a> (requires restart)</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <div class="checkbox">
+                                <label class="control-label"><input type="checkbox" id="select-matched-text"> 选中匹配的单词</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <div class="checkbox">
+                                <label class="control-label"><input type="checkbox" id="enable-audio-playback"> 启用语音播放按钮</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <div class="checkbox">
+                                <label class="control-label"><input type="checkbox" id="enable-anki-connect"> 启用 <a href="https://foosoft.net/projects/anki-connect">AnkiConnect</a></label>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+
+            <div class="options-anki">
+                <h3>Anki 选项</h3>
+
+                <div class="alert alert-danger error-dlg error-dlg-connection">
+                    <strong>不能连接Anki</strong>: 请确保 <a href="https://ninja33.github.io/20160817/anki-connect/">AnkiConnect</a> 插件已经运行在 <a href="http://ankisrs.net/">Anki</a> PC客户端。需要此插件完成Anki相关操作。
+                </div>
+                <div class="alert alert-warning error-dlg error-dlg-version">
+                    <strong>不支持的版本</strong>: 当前<a href="http://ankisrs.net/">Anki</a> PC客户端所安装的 <a href="https://ninja33.github.io/20160817/anki-connect/">AnkiConnect</a> 插件版本于制卡助手不兼容，请更新.
+                </div>
+
+                <form class="form-horizontal options-anki-controls">
+                    <div class="form-group">
+                        <label for="anki-card-tags" class="control-label col-sm-2">卡片标签</label>
+                        <div class="col-sm-10"><input type="text" id="anki-card-tags" class="form-control"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="sentence-extent" class="control-label col-sm-2">例句长度</label>
+                        <div class="col-sm-10"><input type="number" min="1" id="sentence-extent" class="form-control"></div>
+                    </div>
+
+                    <ul class="nav nav-tabs col-sm-offset-2 col-sm-10">
+                        <li class="active"><a href="#vocab" data-toggle="tab">词汇模板映射表</a></li>
+                        <li style="display: none"><a href="#kanji" data-toggle="tab">Kanji</a></li>
+                    </ul>
+
+                    <div class="tab-content col-sm-offset-2 col-sm-10">
+                        <div id="vocab" class="tab-pane fade in active">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label" for="anki-vocab-deck">牌组名称</label>
+                                <div class="col-sm-10">
+                                    <select class="form-control anki-deck" id="anki-vocab-deck"></select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label" for="anki-vocab-model">模板名称</label>
+                                <div class="col-sm-10">
+                                    <select class="form-control anki-model" id="anki-vocab-model"></select>
+                                </div>
+                            </div>
+
+                            <table class="table table-bordered anki-fields">
+                                <thead>
+                                    <tr>
+                                        <th>区域名称</th>
+                                        <th>标签取值</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+
+                            <p>可选区域标签: </p>
+                            <table class="table table-bordered">
+                                <tbody>
+								<tr><td><code>{expression}</code>单词</td><td><code>{reading}</code>音标</td></tr>
+								<tr><td><code>{tags}</code>词性</td>      <td><code>{sentence}</code>例句</td></tr>
+								<tr><td><code>{glossary}</code>释义</td>  <td><code>{glossary-list}</code>多义</td></tr>
+								<tr><td><code>{audio}</code>音频</td>     <td><code>{url}</code>网址</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div id="kanji" class="tab-pane fade">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label" for="anki-kanji-deck">Deck</label>
+                                <div class="col-sm-10">
+                                    <select class="form-control anki-deck" id="anki-kanji-deck"></select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label" for="anki-kanji-model">Model</label>
+                                <div class="col-sm-10">
+                                    <select class="form-control anki-model" id="anki-kanji-model"></select>
+                                </div>
+                            </div>
+
+                            <table class="table table-bordered anki-fields">
+                                <thead>
+                                    <tr>
+                                        <th>Field</th>
+                                        <th>Value</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+
+                            <p>Allowed tags: <code>{character}</code>, <code>{onyomi}</code>, <code>{kunyomi}</code>, <code>{glossary}</code>, <code>{glossary-list}</code>, <code>{url}</code></p>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+
+            <div style="text-align: right;">
+                <small><a href="https://ninja33.github.io/20160817/anki-dict-helper-chrome-extension/">使用说明</a>&bull; <a href="legal.html">版权信息</a></small>
+            </div>
+        </div>
+
+        <script src="../lib/jquery-2.2.2.min.js"></script>
+        <script src="../lib/bootstrap-3.3.6-dist/js/bootstrap.min.js"></script>
+        <script src="js/options.js"></script>
+        <script src="js/options-form.js"></script>
+    </body>
+</html>

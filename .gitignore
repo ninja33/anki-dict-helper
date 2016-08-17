@@ -1,0 +1,6 @@
+*.bat
+*.bak
+*.json
+*.ttf
+doc/
+pkg/

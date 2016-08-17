@@ -1,0 +1,188 @@
+/*
+ * Copyright (C) 2016  Alex Yatskov <alex@foosoft.net>
+ * Author: Alex Yatskov <alex@foosoft.net>
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/* common styles */
+
+body {
+    background-color: #fff;
+    color:            #333;
+    font-family:      'open sans', arial, sans-serif;
+    font-size:        14px;
+    line-height:      1.42857143;
+    overflow-y:       auto;
+    margin:           8px;
+}
+
+
+.tag {
+    border-radius:  3px;
+    color:          #fff;
+    cursor:         default;
+    display:        inline;
+    font-size:      12px;
+    font-weight:    normal;
+    line-height:    1;
+    padding:        0px 3px 0px 2px;
+    text-align:     center;
+    vertical-align: baseline;
+    white-space:    nowrap;
+}
+
+.tag-n {
+    background-color: #e3412f;
+}
+.tag-adj {
+    background-color: #f8b002;
+}
+.tag-adv {
+    background-color: #684b9d;
+}
+.tag-vt {
+    background-color: #539007;
+}
+.tag-vi {
+    background-color: #539007;
+}
+.tag-v {
+    background-color: #539007;
+}
+.tag-default {
+    background-color: #8a8a91;
+}
+
+.tag-name {
+    background-color: #5cb85c;
+}
+
+.tag-expression {
+    background-color: #f0ad4e;
+}
+
+.tag-popular {
+    background-color: #0275d8;
+}
+
+.action-bar {
+    float: right;
+}
+
+.action-bar:after {
+    clear:   both;
+    content: '';
+    display: block;
+}
+
+.action-bar .disabled {
+    pointer-events: none;
+    cursor:         default;
+}
+
+.action-bar .disabled img {
+    -webkit-filter: grayscale(100%);
+    opacity:        0.25;
+}
+
+/* term styles */
+.term-definition{
+    color: #111;
+    border-bottom:    1px solid #ddd;
+    margin-top:       5px;
+    background-color: #fff;
+
+}
+
+.term-word{
+	font-weight: 700;
+}
+
+.term-expression {
+    display:     inline-block;
+    font-size:   14px;
+    font-weight: normal;
+}
+
+.term-expression a {
+    text-decoration: none;
+}
+
+.term-reading {
+    color:     #777;
+    display:   inline-block;
+    font-size: 40%; 
+}
+
+.term-glossary {
+    border-top:   2px #666 solid;
+	background-color: #f5f5f5;
+}
+
+.term-glossary .text_blue{
+
+}
+
+.term-glossary ul {
+    list-style:none;
+    padding-left: 0px;
+    margin:2px;
+}
+
+.term-glossary li {
+    color: #777;
+}
+
+.term-glossary li span {
+    color: #000;
+}
+
+.term-glossary b{
+	font-weight:      normal;
+    border-radius:    3px;
+    color:            #fff;
+	background-color: #aaa;
+	padding-left:     3px;
+	padding-right:    3px;
+}
+
+/* kanji styles */
+
+.kanji-glyph {
+    float:          right;
+    font-family:    kanji-stroke-orders;
+    font-size:      140px;
+    line-height:    140px;
+    padding:        0.01em;
+    vertical-align: top;
+}
+
+.kanji-reading {
+    font-family: vl-gothic-regular;
+}
+
+.kanji-info {
+    display:  block;
+    overflow: hidden;
+}
+
+.kanji-info dt {
+    color:       #777;
+    font-weight: bold;
+}
+
+.kanji-info dd {
+    margin-left: 1.2em;
+}

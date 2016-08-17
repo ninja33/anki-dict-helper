@@ -1,0 +1,42 @@
+<div class="kanji-definition">
+    {{#with options}}
+    <div class="action-bar" data-sequence="{{../sequence}}">
+        {{#if enableAnkiConnect}}
+        <a href="#" title="Add Kanji" class="action-add-note disabled" data-mode="kanji" data-index="{{@index}}"><img src="{{../root}}/img/add_kanji.png"></a>
+        {{/if}}
+    </div>
+    {{/with}}
+
+    <div class="kanji-glyph">{{character}}</div>
+
+    <div class="kanji-info">
+        <dl>
+            {{#if glossary}}
+            <dt>Meanings</dt>
+            <dd>
+                {{#each glossary}}
+                {{.}}{{#unless @last}}, {{/unless}}
+                {{/each}}
+            </dd>
+            {{/if}}
+
+            {{#if kunyomi}}
+            <dt>Kun'yomi</dt>
+            <dd class="kanji-reading">
+                {{#each kunyomi}}
+                {{.}}{{#unless @last}}, {{/unless}}
+                {{/each}}
+            </dd>
+            {{/if}}
+
+            {{#if onyomi}}
+            <dt>On'yomi</dt>
+            <dd class="kanji-reading">
+                {{#each onyomi}}
+                {{.}}{{#unless @last}}, {{/unless}}
+                {{/each}}
+            </dd>
+            {{/if}}
+        </dl>
+    </div>
+</div>
