@@ -36,7 +36,7 @@ class Dictionary {
 
         for (let name in this.termDicts) {
             const dict    = this.termDicts[name];
-            const indices = dict.indices[term] || [];
+            const indices = dict.indices[term] || dict.indices[term.toLowerCase()] || [];
 
             results = results.concat(
                 indices.map(index => {
