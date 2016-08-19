@@ -41,39 +41,42 @@ class Dictionary {
 
         for (let name in this.termDicts) {
             const dict    = this.termDicts[name];
-            const indices = dict.indices[term] ||
-                            dict.indices[term.toLowerCase()] ||
-                            dict.indices[this.formDict[term]] ||
-                            [];
+            const forms   = this.formDict[term.toLowerCase()] || [];
+            var   indices = dict.indices[term] || dict.indices[term.toLowerCase()] || [];
+            
+            if (indices.length > 0 || forms.length > 0){
+                for (let form of forms){
+                    indices = indices.concat(dict.indices[form] || []);
+                }
+                results = results.concat(
+                    indices.map(index => {
+                        const [e, r, t, ...g] = dict.defs[index];
+                        const addons          = [];
+                        const tags            = t.split(' ');
 
-            results = results.concat(
-                indices.map(index => {
-                    const [e, r, t, ...g] = dict.defs[index];
-                    const addons          = [];
-                    const tags            = t.split(' ');
+                        //
+                        // TODO: Handle addons through data.
+                        //
 
-                    //
-                    // TODO: Handle addons through data.
-                    //
-
-                    for (let tag of tags) {
-                        if (tag.startsWith('v5') && tag !== 'v5') {
-                            addons.push('v5');
-                        } else if (tag.startsWith('vs-')) {
-                            addons.push('vs');
+                        for (let tag of tags) {
+                            if (tag.startsWith('v5') && tag !== 'v5') {
+                                addons.push('v5');
+                            } else if (tag.startsWith('vs-')) {
+                                addons.push('vs');
+                            }
                         }
-                    }
 
-                    return {
-                        id:         index,
-                        expression: e,
-                        reading:    r,
-                        glossary:   g,
-                        tags:       tags.concat(addons),
-                        addons:     addons
-                    };
-                })
-            );
+                        return {
+                            id:         index,
+                            expression: e,
+                            reading:    r,
+                            glossary:   g,
+                            tags:       tags.concat(addons),
+                            addons:     addons
+                        };
+                    })
+                );
+            }
         }
 
         return results;

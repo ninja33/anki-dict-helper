@@ -74,7 +74,7 @@ class TextSourceRange {
                 }
 
                 var startPos = getStartPos(1);
-                var endPos = getEndPos(5);
+                var endPos = getEndPos(2);
                 
                 this.rng.setStart(a.startContainer,startPos==0?0:startPos+1);
                 this.rng.setEnd(a.endContainer,endPos==a.endContainer.data.length?endPos:endPos-1);

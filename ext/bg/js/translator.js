@@ -107,6 +107,14 @@ class Translator {
                 return 1;
             }
 
+            const el1 = v1.expression.length;
+            const el2 = v2.expression.length;
+            if (el1 > el2) {
+                return -1;
+            } else if (el1 < el2) {
+                return 1;
+            }
+
             return v2.expression.localeCompare(v1.expression);
         });
         
