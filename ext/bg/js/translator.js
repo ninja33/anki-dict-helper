@@ -28,7 +28,7 @@ class Translator {
 
         this.loaded      = false;
         this.tags        = null;
-		this.wordforms   = null;
+        this.wordforms   = null;
         this.dictionary  = new Dictionary();
         this.deinflector = new Deinflector();
     }
@@ -78,47 +78,50 @@ class Translator {
 
     findTerm(text) {
         const groups = {};
-		
-		const segments = text.replace(/[^\w]/g,' ').trim().split(' ')
+        
+        const segments = text.replace(/[^\w]/g,' ').trim().split(' ')
 
-		function isEmptyObject(obj) {
-			return Object.keys(obj).length === 0;
-		}
+        function isEmptyObject(obj) {
+            return Object.keys(obj).length === 0;
+        }
 
-		for (let i = segments.length; i>0; --i){
-			const term = segments.slice(0,i).join(' ');
+        for (let i = segments.length; i>0; --i){
+            const term = segments.slice(0,i).join(' ').trim();
             const tags = [];
             for (let d of this.dictionary.findTerm(term)) {
                 tags.concat(d.tags);
             }
             this.processTerm(groups, term, tags, [], term);
         }
-
-
-		if (isEmptyObject(groups)) {
-			const term = segments[0].toLowerCase();
-            const tags = [];
-            for (let d of this.dictionary.findTerm(term)) {
-                tags.concat(d.tags);
-            }
-			this.processTerm(groups, term, tags, [], term);
-		}
-
-		if (isEmptyObject(groups) && segments[0].toLowerCase() in this.wordforms) {
-			for (let term of this.wordforms[segments[0].toLowerCase()]){
-				const tags = [];
-				for (let d of this.dictionary.findTerm(term)) {
-					tags.concat(d.tags);
-				}
-				this.processTerm(groups, term, tags, [], term);
-				}
-		}
-		
+        
+        const firstword = segments[0].toLowerCase()
+        if (isEmptyObject(groups) && firstword in this.wordforms) {
+            for (let term of this.wordforms[firstword]){
+                const tags = [];
+                for (let d of this.dictionary.findTerm(term)) {
+                    tags.concat(d.tags);
+                }
+                this.processTerm(groups, firstword, tags, [], term);
+                }
+        }
+        
         let definitions = [];
         for (let key in groups) {
             definitions.push(groups[key]);
         }
 
+        definitions = definitions.sort((v1, v2) => {
+            const sl1 = v1.source.length;
+            const sl2 = v2.source.length;
+            if (sl1 > sl2) {
+                return -1;
+            } else if (sl1 < sl2) {
+                return 1;
+            }
+
+            return v2.expression.localeCompare(v1.expression);
+        });
+        
         let length = 0;
         for (let result of definitions) {
             length = Math.max(length, result.source.length);
@@ -176,26 +179,6 @@ class Translator {
                     popular = true;
                 }
             }
-
-            tagItems = tagItems.sort((v1, v2) => {
-                const order1 = v1.order;
-                const order2 = v2.order;
-                if (order1 < order2) {
-                    return -1;
-                } else if (order1 > order2) {
-                    return 1;
-                }
-
-                const name1 = v1.name;
-                const name2 = v2.name;
-                if (name1 < name2) {
-                    return -1;
-                } else if (name1 > name2) {
-                    return 1;
-                }
-
-                return 0;
-            });
 
             if (matched) {
                 groups[entry.id] = {
