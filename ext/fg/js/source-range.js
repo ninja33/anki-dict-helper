@@ -30,61 +30,61 @@ class TextSourceRange {
         return this.rng.toString();
     }
 
-	//set English words offset by words count (not character count)	
-	setWordsOffset(){
-		var a=this.rng;
-		do if(a){
-			var g=a.cloneRange();
-			if(a.startContainer.data){
+    //set English words offset by words count (not character count) 
+    setWordsOffset(){
+        var a=this.rng;
+        do if(a){
+            var g=a.cloneRange();
+            if(a.startContainer.data){
 
-				function isAlpha(a){
-					return /\w+/.test(a);
-				}
+                function isAlpha(a){
+                    return /\w/.test(a);
+                }
 
-				function getStartPos(backward_count){
-					var count=0, b='', pos=a.startOffset;
-					for(;pos>=1;){
-						g.setStart(a.startContainer,--pos);
-						b=g.toString();
-						if(!isAlpha(b.charAt(0))){
-							count++;
-							if(count==backward_count){
-								break
-							}
-						}
-					}
+                function getStartPos(backward_count){
+                    var count=0, b='', pos=a.startOffset;
+                    for(;pos>=1;){
+                        g.setStart(a.startContainer,--pos);
+                        b=g.toString();
+                        if(!isAlpha(b.charAt(0))){
+                            count++;
+                            if(count==backward_count){
+                                break
+                            }
+                        }
+                    }
 
-					return pos;
-				}
+                    return pos;
+                }
 
-				function getEndPos(forward_count){
-					var count=0, b='', pos=a.endOffset;
-					for(;pos<a.endContainer.data.length;){
-						g.setEnd(a.endContainer,++pos);
-						b=g.toString();
-						if(!isAlpha(b.charAt(b.length-1))){
-							count++;
-							if(count==forward_count){
-								break
-							}
-						}
-					}
+                function getEndPos(forward_count){
+                    var count=0, b='', pos=a.endOffset;
+                    for(;pos<a.endContainer.data.length;){
+                        g.setEnd(a.endContainer,++pos);
+                        b=g.toString();
+                        if(!isAlpha(b.charAt(b.length-1))){
+                            count++;
+                            if(count==forward_count){
+                                break
+                            }
+                        }
+                    }
 
-					return pos;
-				}
+                    return pos;
+                }
 
-				var startPos = getStartPos(1);
-				var endPos = getEndPos(5);
-				
-				this.rng.setStart(a.startContainer,startPos==0?0:startPos+1);
-				this.rng.setEnd(a.endContainer,endPos==a.endContainer.data.length?endPos:endPos-1);
-			}
+                var startPos = getStartPos(1);
+                var endPos = getEndPos(5);
+                
+                this.rng.setStart(a.startContainer,startPos==0?0:startPos+1);
+                this.rng.setEnd(a.endContainer,endPos==a.endContainer.data.length?endPos:endPos-1);
+            }
 
-		}while(0);
-		
-		return null;
-	}
-	
+        }while(0);
+        
+        return null;
+    }
+    
     setEndOffset(length) {
         const lengthAdj = length + this.rng.startOffset;
         const state = TextSourceRange.seekForward(this.rng.startContainer, lengthAdj);
