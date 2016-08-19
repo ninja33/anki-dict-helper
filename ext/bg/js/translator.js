@@ -28,7 +28,6 @@ class Translator {
 
         this.loaded      = false;
         this.tags        = null;
-        this.wordforms   = null;
         this.dictionary  = new Dictionary();
         this.deinflector = new Deinflector();
     }
@@ -56,7 +55,7 @@ class Translator {
                         this.tags = JSON.parse(response);
                         break;
                     case 'wordforms':
-                        this.wordforms = JSON.parse(response);
+                        this.dictionary.addFormDict(JSON.parse(response));
                         break;
                     case 'kanjidic':
                         this.dictionary.addKanjiDict(key, JSON.parse(response));
@@ -92,17 +91,6 @@ class Translator {
                 tags.concat(d.tags);
             }
             this.processTerm(groups, term, tags, [], term);
-        }
-        
-        const firstword = segments[0].toLowerCase()
-        if (isEmptyObject(groups) && firstword in this.wordforms) {
-            for (let term of this.wordforms[firstword]){
-                const tags = [];
-                for (let d of this.dictionary.findTerm(term)) {
-                    tags.concat(d.tags);
-                }
-                this.processTerm(groups, firstword, tags, [], term);
-                }
         }
         
         let definitions = [];
