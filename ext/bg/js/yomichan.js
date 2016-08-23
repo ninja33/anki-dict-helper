@@ -192,7 +192,7 @@ class Yomichan {
                         value = null;
                         break;
                     }
-                    value = `[${definition.reading}]`;
+                    value = `${definition.reading.replace(/\//g,'')}`;
                     break;
                 case 'glossary':
                     if (definition.glossary) {
