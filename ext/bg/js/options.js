@@ -25,7 +25,7 @@ function sanitizeOptions(options) {
         loadEnamDict:        false,
         enableAudioPlayback: true,
         enableAnkiConnect:   false,
-        ankiCardTags:        ['yomichan'],
+        ankiCardTags:        ['IR(增量阅读)'],
         sentenceExtent:      200,
         ankiVocabDeck:       '',
         ankiVocabModel:      '',
