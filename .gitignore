@@ -1,6 +1,6 @@
 *.bat
 *.bak
-*.json
 *.ttf
+ext/bg/data/
 doc/
 pkg/
