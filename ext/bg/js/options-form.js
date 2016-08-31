@@ -174,7 +174,7 @@ function populateAnkiFields(element, opts) {
 }
 
 function onOptionsGeneralChanged(e) {
-    if (!e.originalEvent) {
+    if (!e.originalEvent && !e.isTrigger) {
         return;
     }
 
