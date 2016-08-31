@@ -34,6 +34,27 @@ function modelIdToFieldOptKey(id) {
     return {'anki-vocab-model': 'ankiVocabFields', 'anki-kanji-model': 'ankiKanjiFields'}[id];
 }
 
+function modelIdToMarkers(id) {
+    return {
+        'anki-vocab-model': [
+            'expression',
+            'reading',
+            'glossary',
+            'sentence',
+            'url',
+            'audio'
+        ],
+        'anki-kanji-model': [
+            'character',
+            'glossary',
+            'glossary-list',
+            'kunyomi',
+            'onyomi',
+            'url'
+        ],
+    }[id];
+}
+
 function formToOptions(section, callback) {
     loadOptions((optsOld) => {
         const optsNew = $.extend({}, optsOld);
@@ -110,21 +131,45 @@ function populateAnkiFields(element, opts) {
         return;
     }
 
-    const optKey = modelIdToFieldOptKey(element.attr('id'));
+    const modelId = element.attr('id');
+    const optKey = modelIdToFieldOptKey(modelId);
+    const markers = modelIdToMarkers(modelId);
+
     yomichan().api_getModelFieldNames({modelName, callback: (names) => {
         const table = element.closest('.tab-pane').find('.anki-fields');
         table.find('tbody').remove();
 
-        const body = $('<tbody>');
+        const tbody = $('<tbody>');
         names.forEach((name) => {
+            const button = $('<button>', {type: 'button', class: 'btn btn-default dropdown-toggle'});
+            button.attr('data-toggle', 'dropdown').dropdown();
+
+            const markerItems = $('<ul>', {class: 'dropdown-menu dropdown-menu-right'});
+            for (const marker of markers) {
+                const link = $('<a>', {href: '#'}).text(`{${marker}}`);
+                link.click((e) => {
+                    e.preventDefault();
+                    link.closest('.input-group').find('.anki-field-value').val(link.text()).trigger('change');
+                });
+                markerItems.append($('<li>').append(link));
+            }
+
+            const groupBtn = $('<div>', {class: 'input-group-btn'});
+            groupBtn.append(button.append($('<span>', {class: 'caret'})));
+            groupBtn.append(markerItems);
+
+            const group = $('<div>', {class: 'input-group'});
+            group.append($('<input>', {type: 'text', class: 'anki-field-value form-control', value: opts[optKey][name] || ''}).data('field', name).change(onOptionsAnkiChanged));
+            group.append(groupBtn);
+
             const row = $('<tr>');
-            row.append($('<td>', {class: 'col-sm-2'}).text(name));
-            const value = opts[optKey][name] || '';
-            row.append($('<td>', {class: 'col-sm-10'}).append($('<input>', {class: 'anki-field-value form-control', value}).data('field', name).change(onOptionsAnkiChanged)));
-            body.append(row);
+            row.append($('<td>', {class: 'col-sm-2 text-nowrap'}).text(name));
+            row.append($('<td>', {class: 'col-sm-10'}).append(group));
+
+            tbody.append(row);
         });
 
-        table.append(body);
+        table.append(tbody);
     }});
 }
 
@@ -148,12 +193,15 @@ function onOptionsGeneralChanged(e) {
 }
 
 function onOptionsAnkiChanged(e) {
-    if (e.originalEvent) {
-        formToOptions('anki', (opts) => {
-            saveOptions(opts, () => yomichan().setOptions(opts));
-        });
+    if (!e.originalEvent && !e.isTrigger) {
+        return;
     }
+
+    formToOptions('anki', (opts) => {
+        saveOptions(opts, () => yomichan().setOptions(opts));
+    });
 }
+
 
 function onAnkiModelChanged(e) {
     if (e.originalEvent) {
