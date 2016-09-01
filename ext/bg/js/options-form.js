@@ -70,18 +70,19 @@ function formToOptions(section, callback) {
                 optsNew.selectMatchedText   = $('#select-matched-text').prop('checked');
                 optsNew.showAdvancedOptions = $('#show-advanced-options').prop('checked');
                 optsNew.enableAudioPlayback = $('#enable-audio-playback').prop('checked');
-                optsNew.enableAnkiConnect   = $('#enable-anki-connect').prop('checked');
-                optsNew.enableAnkiWeb       = $('#enable-anki-web').prop('checked');
+                optsNew.disableAnkiOption   = $('#disable-anki-option').prop('checked');
+                optsNew.enableAnkiConnect   = $('#enable-ankiconnect').prop('checked');
+                optsNew.enableAnkiWeb       = $('#enable-ankiweb').prop('checked');
                 break;
             case 'anki':
                 optsNew.ankiCardTags    = $('#anki-card-tags').val().split(/[,; ]+/);
                 optsNew.sentenceExtent  = parseInt($('#sentence-extent').val());
                 optsNew.ankiVocabDeck   = $('#anki-vocab-deck').val();
                 optsNew.ankiVocabModel  = $('#anki-vocab-model').val();
-                optsNew.ankiVocabFields = fieldsToDict($('#vocab .anki-connect-field-value'));
+                optsNew.ankiVocabFields = fieldsToDict($('#vocab .ankiconnect-field-value'));
                 optsNew.ankiKanjiDeck   = $('#anki-kanji-deck').val();
                 optsNew.ankiKanjiModel  = $('#anki-kanji-model').val();
-                optsNew.ankiKanjiFields = fieldsToDict($('#kanji .anki-connect-field-value'));
+                optsNew.ankiKanjiFields = fieldsToDict($('#kanji .ankiconnect-field-value'));
                 break;
         }
 
@@ -120,12 +121,12 @@ function updateAnkiStatus() {
     yomichan().api_getVersion({callback: (version) => {
         if (version === null) {
             $('.error-dlg-connection').show();
-            $('.options-anki-connect-controls').hide();
+            $('.options-ankiconnect-controls').hide();
         } else if (version !== yomichan().getApiVersion()) {
             $('.error-dlg-version').show();
-            $('.options-anki-connect-controls').hide();
+            $('.options-ankiconnect-controls').hide();
         } else {
-            $('.options-anki-connect-controls').show();
+            $('.options-ankiconnect-controls').show();
         }
     }});
 }
@@ -141,7 +142,7 @@ function populateAnkiFields(element, opts) {
     const markers = modelIdToMarkers(modelId);
 
     yomichan().api_getModelFieldNames({modelName, callback: (names) => {
-        const table = element.closest('.tab-pane').find('.anki-connect-fields');
+        const table = element.closest('.tab-pane').find('.ankiconnect-fields');
         table.find('tbody').remove();
 
         const tbody = $('<tbody>');
@@ -154,7 +155,7 @@ function populateAnkiFields(element, opts) {
                 const link = $('<a>', {href: '#'}).text(`{${marker}}`);
                 link.click((e) => {
                     e.preventDefault();
-                    link.closest('.input-group').find('.anki-connect-field-value').val(link.text()).trigger('change');
+                    link.closest('.input-group').find('.ankiconnect-field-value').val(link.text()).trigger('change');
                 });
                 markerItems.append($('<li>').append(link));
             }
@@ -164,7 +165,7 @@ function populateAnkiFields(element, opts) {
             groupBtn.append(markerItems);
 
             const group = $('<div>', {class: 'input-group'});
-            group.append($('<input>', {type: 'text', class: 'anki-connect-field-value form-control', value: opts[optKey][name] || ''}).data('field', name).change(onOptionsAnkiChanged));
+            group.append($('<input>', {type: 'text', class: 'ankiconnect-field-value form-control', value: opts[optKey][name] || ''}).data('field', name).change(onOptionsAnkiChanged));
             group.append(groupBtn);
 
             const row = $('<tr>');
@@ -189,15 +190,15 @@ function onOptionsGeneralChanged(e) {
             if (!optsOld.enableAnkiConnect && optsNew.enableAnkiConnect) {
                 updateAnkiStatus();
                 populateAnkiDeckAndModel(optsNew);
-                $('.options-anki-connect').show();
+                $('.options-ankiconnect').show();
             } else if (optsOld.enableAnkiConnect && !optsNew.enableAnkiConnect) {
-                $('.options-anki-connect').hide();
+                $('.options-ankiconnect').hide();
             }
 
             if (!optsOld.enableAnkiWeb && optsNew.enableAnkiWeb) {
-                $('.options-anki-web').show();
+                $('.options-ankiweb').show();
             } else if (optsOld.enableAnkiWeb && !optsNew.enableAnkiWeb) {
-                $('.options-anki-web').hide();
+                $('.options-ankiweb').hide();
             }
 
 
@@ -239,14 +240,15 @@ $(document).ready(() => {
         $('#select-matched-text').prop('checked', opts.selectMatchedText);
         $('#show-advanced-options').prop('checked', opts.showAdvancedOptions);
         $('#enable-audio-playback').prop('checked', opts.enableAudioPlayback);
-        $('#enable-anki-connect').prop('checked', opts.enableAnkiConnect);
-        $('#enable-anki-web').prop('checked', opts.enableAnkiWeb);
+        $('#disable-anki-option').prop('checked', opts.disableAnkiOption);
+        $('#enable-ankiconnect').prop('checked', opts.enableAnkiConnect);
+        $('#enable-ankiweb').prop('checked', opts.enableAnkiWeb);
 
         $('#anki-card-tags').val(opts.ankiCardTags.join(' '));
         $('#sentence-extent').val(opts.sentenceExtent);
 
         $('.options-general input').change(onOptionsGeneralChanged);
-        $('.options-anki-connect input').change(onOptionsAnkiChanged);
+        $('.options-ankiconnect input').change(onOptionsAnkiChanged);
         $('.anki-deck').change(onOptionsAnkiChanged);
         $('.anki-model').change(onAnkiModelChanged);
 
@@ -257,13 +259,17 @@ $(document).ready(() => {
         if (opts.enableAnkiConnect) {
             updateAnkiStatus();
             populateAnkiDeckAndModel(opts);
-            $('.options-anki-connect').show();
+            $('.options-ankiconnect').show();
+        } else {
+            $('.options-ankiconnect').hide();
         }
 
         if (opts.enableAnkiWeb) {
             //updateAnkiStatus();
             //populateAnkiDeckAndModel(opts);
-            $('.options-anki-web').show();
+            $('.options-ankiweb').show();
+        } else {
+            $('.options-ankiweb').hide();
         }
 
         });

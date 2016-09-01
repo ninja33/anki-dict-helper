@@ -25,6 +25,7 @@ function sanitizeOptions(options) {
         showAdvancedOptions: false,
         loadEnamDict:        false,
         enableAudioPlayback: true,
+        disableAnkiOption:   false,
         enableAnkiConnect:   false,
         enableAnkiWeb:       false,
         ankiCardTags:        ['dict-helper'],
