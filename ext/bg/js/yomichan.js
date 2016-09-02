@@ -36,6 +36,7 @@ class Yomichan {
         this.translator = new Translator();
         this.asyncPools = {};
         this.setState('disabled');
+        this.loginStatus = '';
 
         chrome.runtime.onInstalled.addListener(this.onInstalled.bind(this));
         chrome.runtime.onMessage.addListener(this.onMessage.bind(this));
@@ -156,6 +157,8 @@ class Yomichan {
 
             xhr.open('POST', 'http://127.0.0.1:8765');
             xhr.send(JSON.stringify({action, params}));
+        } else if (this.options.enableAnkiWeb){
+            this.api_invokeAnkiweb(action, params, callback);            
         } else {
             callback(null);
         }
@@ -317,12 +320,90 @@ class Yomichan {
     }
 
     api_getVersion({callback}) {
-        this.ankiInvoke('version', {}, null, callback);
+        if (this.options.enableAnkiConnect) {
+            this.ankiInvoke('version', {}, null, callback);
+        } else if (this.options.enableAnkiWeb) {
+            this.api_connectAnkiweb(forceRelogin=true, callback);
+        } else {
+            callback(null)
+        }
     }
 
     api_renderText({template, data, callback}) {
         callback(Handlebars.templates[template](data));
     }
+    
+    api_connectAnkiweb(forceRelogin, callback) {
+        if (forceRelogin || this.loginStatus != "OK") {
+            console.log("Logout form AnkiWeb");
+            currentXhr = $.get('https://ankiweb.net/account/logout', function (data, textStatus) { //Start with logging any other user off.
+                console.log("Login to AnkiWeb");
+                currentXhr = $.post('https://ankiweb.net/account/login', { //Submit user info
+                        submitted: "1",
+                        username: this.options.ankiwebUsername,
+                        password: this.options.ankiwebPassword
+                    },
+                    function (data, textStatus) {
+                        const html = $(data);
+                        if ($(".mitem", html).length == 0) { //Look for element with class 'mitem' which is only used by the tabs that show up when logged in.
+                            this.loginStatus = "ERROR";
+                            callback(null); //return null to indicate connection failed.
+                        } else {
+                            this.loginStatus = "OK";
+                            callback(this.getApiVersion()); //return right answer of api_getVersion() to indicate success :-).
+                        }
+                    });
+            });
+        }
+    }
+
+    api_invokeAnkiweb(action, params, callback) {
+        currentXhr = $.get('https://ankiweb.net/edit/', function (data, textStatus) {
+            console.log("decks and models data loaded");
+            if (textStatus == 'error') {
+                this.loginStatus = "ERROR";
+                callback(null);
+            } else {
+                const models = jQuery.parseJSON(/editor\.models = (.*}]);/.exec(data)[1]); //[0] = the matching text, [1] = first capture group (what's inside parentheses)
+                const decks = jQuery.parseJSON(/editor\.decks = (.*}});/.exec(data)[1]);
+
+                result = null;
+                switch (action) {
+                    case 'deckNames':
+                        var decknames = [];
+                        for (let d in decks) {
+                            if (!(d == 1 && decks[d].mid == null && Object.keys(decks).length > 1)) {
+                                decknames.push(decks[d].name);
+                            }
+                        }
+                        decknames.sort();
+                        result = decknames;
+                        break;
+                    case 'modelNames':
+                        var modelnames = [];
+                        for (let m in models) {
+                            modelnames.push(models[m].name);
+                        }
+                        result = modelnames;
+                        break;
+                    case 'modelFieldNames':
+                        var fieldnames = [];
+                        for (let m in models) {
+                            if (models[m].name == params) {
+                                for (let f in models[m].flds) {
+                                    fieldnames.push(models[m].flds[f].name);
+                                }
+                            break;
+                            }
+                        }
+                        result = fieldnames;
+                        break;
+                }
+                callback(result);
+            }
+        });
+    }
+
 }
 
 window.yomichan = new Yomichan();

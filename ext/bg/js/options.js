@@ -25,7 +25,7 @@ function sanitizeOptions(options) {
         showAdvancedOptions: false,
         loadEnamDict:        false,
         enableAudioPlayback: true,
-        disableAnkiOption:   false,
+        disableAnkiOption:   true,
         enableAnkiConnect:   false,
         enableAnkiWeb:       false,
         ankiCardTags:        ['dict-helper'],
@@ -35,7 +35,9 @@ function sanitizeOptions(options) {
         ankiVocabFields:     {},
         ankiKanjiDeck:       '',
         ankiKanjiModel:      '',
-        ankiKanjiFields:     {}
+        ankiKanjiFields:     {},
+        ankiwebUsername:     '',
+        ankiwebPassword:     ''
     };
 
     for (const key in defaults) {
