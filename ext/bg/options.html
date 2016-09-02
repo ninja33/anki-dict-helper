@@ -26,7 +26,7 @@
     <body>
         <div class="container">
             <div class="options-general">
-                <h3>通用选项</h3>
+                <h4>通用选项</h4>
 
                 <form class="form-horizontal">
                     <div class="form-group options-advanced">
@@ -91,20 +91,45 @@
 
             </div>
 
-            <div class="options-ankiconnect">
+            <hr>
+            
+            <div class="options-anki">
 
-                <h3>Anki Connect 选项</h3>
+                <h4>Anki Connect 选项</h4>
 
                 <div class="alert alert-danger error-dlg error-dlg-connection">
-                    <strong>不能连接Anki</strong>: 请确保 <a href="https://ninja33.github.io/20160817/anki-connect/">AnkiConnect</a> 插件已经运行在 <a href="http://ankisrs.net/">Anki</a> PC客户端。需要此插件完成Anki相关操作。
+                    <strong>不能连接至(1)AnkiWeb网站 或者(2)Anki PC客户端</strong>: 请确保(1)互联网已连接至Ankiweb或者(2) <a href="https://ninja33.github.io/20160817/anki-connect/">AnkiConnect</a> 插件已经运行在 <a href="http://ankisrs.net/">Anki</a> PC客户端。
                 </div>
                 <div class="alert alert-warning error-dlg error-dlg-version">
 
                     <strong>不支持的版本</strong>: 当前<a href="http://ankisrs.net/">Anki</a> PC客户端所安装的 <a href="https://ninja33.github.io/20160817/anki-connect/">AnkiConnect</a> 插件版本于制卡助手不兼容，请更新.
                 </div>
 
-                <form class="form-horizontal options-ankiconnect-controls">
+                <form class="form-horizontal options-ankiweb">
                     <div class="form-group">
+                        <div class="col-sm-6">
+                            <div class="input-group">
+                                <span class="input-group-addon">Username</span>
+                                <input type="text" class="form-control" id="ankiweb-username" placeholder="username">
+                            </div>
+                        </div>
+                        <br>
+                        <div class="col-sm-6">
+                            <div class="input-group">
+                                <span class="input-group-addon">Password</span>
+                                <input type="password" class="form-control" id="ankiweb-password" placeholder="password">
+                                <span class="input-group-btn">
+                                    <button class="btn btn btn-primary" type="button">Go!</button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                
+                <form class="form-horizontal options-anki-controls">
+
+
+                    <div class="form-group options-advanced">
                         <label for="anki-card-tags" class="control-label col-sm-2">卡片标签</label>
                         <div class="col-sm-10"><input type="text" id="anki-card-tags" class="form-control"></div>
                     </div>
@@ -116,7 +141,6 @@
 
                     <ul class="nav nav-tabs col-sm-offset-2 col-sm-10">
                         <li class="active"><a href="#vocab" data-toggle="tab">词汇模板映射表</a></li>
-                        <li><a href="#kanji" data-toggle="tab">Kanji</a></li>
                     </ul>
 
                     <div class="tab-content col-sm-offset-2 col-sm-10">
@@ -135,7 +159,7 @@
                                 </div>
                             </div>
 
-                            <table class="table table-bordered ankiconnect-fields">
+                            <table class="table table-bordered anki-fields">
                                 <thead>
                                     <tr>
 
@@ -157,140 +181,11 @@
                                 </tbody>
                             </table>
                         </div>
-
-                        <div id="kanji" class="tab-pane fade">
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label" for="anki-kanji-deck">Deck</label>
-                                <div class="col-sm-10">
-                                    <select class="form-control anki-deck" id="anki-kanji-deck"></select>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label" for="anki-kanji-model">Model</label>
-                                <div class="col-sm-10">
-                                    <select class="form-control anki-model" id="anki-kanji-model"></select>
-                                </div>
-                            </div>
-
-                            <table class="table table-bordered ankiconnect-fields">
-                                <thead>
-                                    <tr>
-                                        <th>Field</th>
-                                        <th>Value</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                </tbody>
-                            </table>
-
-                            <p>Allowed tags: <code>{character}</code>, <code>{onyomi}</code>, <code>{kunyomi}</code>, <code>{glossary}</code>, <code>{glossary-list}</code>, <code>{url}</code></p>
-                        </div>
                     </div>
                 </form>
 
             </div>
-
-            <div class="options-ankiweb">
-
-                <h3>Anki Web 选项</h3>
-
-                <div class="alert alert-danger error-dlg error-dlg-connection">
-                    <strong>不能连接Anki</strong>: 请确保 <a href="https://ninja33.github.io/20160817/anki-connect/">AnkiConnect</a> 插件已经运行在 <a href="http://ankisrs.net/">Anki</a> PC客户端。需要此插件完成Anki相关操作。
-                </div>
-                <div class="alert alert-warning error-dlg error-dlg-version">
-
-                    <strong>不支持的版本</strong>: 当前<a href="http://ankisrs.net/">Anki</a> PC客户端所安装的 <a href="https://ninja33.github.io/20160817/anki-connect/">AnkiConnect</a> 插件版本于制卡助手不兼容，请更新.
-                </div>
-
-                <form class="form-horizontal options-ankiweb-controls">
-                    <div class="form-group">
-                        <label for="anki-card-tags" class="control-label col-sm-2">卡片标签</label>
-                        <div class="col-sm-10"><input type="text" id="anki-card-tags" class="form-control"></div>
-                    </div>
-
-                    <div class="form-group options-advanced">
-                        <label for="sentence-extent" class="control-label col-sm-2">例句长度</label>
-                        <div class="col-sm-10"><input type="number" min="1" id="sentence-extent" class="form-control"></div>
-                    </div>
-
-                    <ul class="nav nav-tabs col-sm-offset-2 col-sm-10">
-                        <li class="active"><a href="#vocab" data-toggle="tab">词汇模板映射表</a></li>
-                        <li><a href="#kanji" data-toggle="tab">Kanji</a></li>
-                    </ul>
-
-                    <div class="tab-content col-sm-offset-2 col-sm-10">
-                        <div id="vocab" class="tab-pane fade in active">
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label" for="anki-web-vocab-deck">牌组名称</label>
-                                <div class="col-sm-10">
-                                    <select class="form-control anki-deck" id="anki-web-vocab-deck"></select>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label" for="anki-web-vocab-model">模板名称</label>
-                                <div class="col-sm-10">
-                                    <select class="form-control anki-model" id="anki-web-vocab-model"></select>
-                                </div>
-                            </div>
-
-                            <table class="table table-bordered ankiweb-fields">
-                                <thead>
-                                    <tr>
-
-
-                                        <th class="text-nowrap">区域名称</th>
-                                        <th class="text-nowrap">标签取值</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                </tbody>
-                            </table>
-
-                            <p>标签说明: </p>
-                            <table class="table table-bordered">
-                                <tbody>
-                                <tr><td>单词</td><td><code>{expression}</code></td><td>音标</td><td><code>{reading}</code></td></tr>
-                                <tr><td>释义</td><td><code>{glossary}</code></td><td>例句</td><td><code>{sentence}</code></td></tr>
-                                <tr><td>网址</td><td><code>{url}</code></td><td>音频</td><td><code>{audio}</code></td></tr>
-                                </tbody>
-                            </table>
-                        </div>
-
-                        <div id="kanji" class="tab-pane fade">
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label" for="anki-web-kanji-deck">Deck</label>
-                                <div class="col-sm-10">
-                                    <select class="form-control anki-deck" id="anki-web-kanji-deck"></select>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label" for="anki-web-kanji-model">Model</label>
-                                <div class="col-sm-10">
-                                    <select class="form-control anki-model" id="anki-web-kanji-model"></select>
-                                </div>
-                            </div>
-
-                            <table class="table table-bordered ankiweb-fields">
-                                <thead>
-                                    <tr>
-                                        <th>Field</th>
-                                        <th>Value</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                </tbody>
-                            </table>
-
-                            <p>Allowed tags: <code>{character}</code>, <code>{onyomi}</code>, <code>{kunyomi}</code>, <code>{glossary}</code>, <code>{glossary-list}</code>, <code>{url}</code></p>
-                        </div>
-                    </div>
-                </form>
-
-            </div>
-
+ 
             <div style="text-align: right;">
                 <small><a href="https://ninja33.github.io/20160817/anki-dict-helper-chrome-extension/">使用说明</a>&bull; <a href="legal.html">版权信息</a></small>
             </div>

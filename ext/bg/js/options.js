@@ -33,9 +33,6 @@ function sanitizeOptions(options) {
         ankiVocabDeck:       '',
         ankiVocabModel:      '',
         ankiVocabFields:     {},
-        ankiKanjiDeck:       '',
-        ankiKanjiModel:      '',
-        ankiKanjiFields:     {},
         ankiwebUsername:     '',
         ankiwebPassword:     ''
     };

@@ -24,7 +24,7 @@
     "options_ui": {
         "page": "bg/options.html"
     },
-    "permissions": ["file://*/*", "http://127.0.0.1/*", "storage"],
+    "permissions": ["file://*/*", "http://*/*", "https://*/*", "storage"],
     "web_accessible_resources": [
         "fg/css/frame.css",
         "fg/img/add_kanji.png",
