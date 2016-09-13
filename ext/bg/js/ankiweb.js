@@ -23,7 +23,7 @@ class Ankiweb {
             logout : 'https://ankiweb.net/account/logout',
             login  : 'https://ankiweb.net/account/login',
             edit   : 'https://ankiweb.net/edit/',
-            save   : 'https://ankiweb.net/save/'
+            save   : 'https://ankiweb.net/edit/save'
         };
 
         this.connected   = false;
@@ -96,6 +96,25 @@ class Ankiweb {
         });
     }
 
+    
+    save(data, callback){
+        var tags = localStorage["fieldTags"].replace(/,/g, ' ');
+
+        var data = [fields, tags];
+
+        var dict = {
+            data: JSON.stringify(data),
+            mid: $("[name=model]").val(), //model id
+            deck: (returnDeck ? localStorage["currentDeck"] : $("[name=deck]").val())
+        };
+
+        var currentXhr = $.get(this.urls['save'], dict, (data, textStatus) => {
+            if (textStatus == 'error') {
+                callback(false);
+            }
+            callback(true);
+        });
+    }
 
     static connectAnkiweb(method, url, callback) {
         const xhr = new XMLHttpRequest();
