@@ -34,13 +34,11 @@ class Yomichan {
         });
 
         this.translator = new Translator();
+        this.ankiweb = new Ankiweb();
         this.asyncPools = {};
         this.setState('disabled');
         this.ankiConnectVer = 0;
-        this.ankiwebLogonStatus = '';
-        this.ankiwebDecks = [];
-        this.ankiwebModels = [];
-        this.ankiwebModelFields = {};
+        this.ankiwebConnected = false;
 
         chrome.runtime.onInstalled.addListener(this.onInstalled.bind(this));
         chrome.runtime.onMessage.addListener(this.onMessage.bind(this));
@@ -52,6 +50,9 @@ class Yomichan {
             this.setOptions(opts);
             if (this.options.activateOnStartup) {
                 this.setState('loading');
+            }
+            if (this.options.enableAnkiWeb) {
+                this.connectAnkiweb(result => this.ankiwebConnected = result);
             }
         });
     }
@@ -176,13 +177,13 @@ class Yomichan {
     invokeAnkiweb(action, params, callback) {
         switch (action) {
             case 'deckNames':
-                callback(this.ankiwebDecks);
+                callback(this.ankiweb.decks);
                 break;
             case 'modelNames':
-                callback(this.ankiwebModels);
+                callback(this.ankiweb.models);
                 break;
             case 'modelFieldNames':
-                callback(this.ankiwebModelFields[params['modelName']]);
+                callback(this.ankiweb.modelfields[params['modelName']]);
                 break;
             case 'addNote':
                 callback(null);
@@ -353,7 +354,11 @@ class Yomichan {
         if (this.options.enableAnkiConnect) {
             this.ankiInvoke('version', {}, null, callback);
         } else if (this.options.enableAnkiWeb) {
-            this.connectAnkiweb(callback);
+            if (this.ankiwebConnected == true) {
+                callback(1);
+            } else {
+                callback(null);
+            }
         } else {
             callback(null)
         }
@@ -364,70 +369,8 @@ class Yomichan {
     }
     
     connectAnkiweb(callback) {
-        if (this.ankiwebLogonStatus != "OK") {
-            console.log("Logout form AnkiWeb");
-            var currentXhr = $.get('https://ankiweb.net/account/logout', (data, textStatus) => { //Start with logging any other user off.
-                console.log("Login to AnkiWeb");
-                currentXhr = $.post('https://ankiweb.net/account/login', { //Submit user info
-                        submitted: "1",
-                        username: this.options.ankiwebUsername,
-                        password: this.options.ankiwebPassword
-                    }, (data, textStatus) => {
-                        const html = $(data);
-                        if ($(".mitem", html).length == 0) { //Look for element with class 'mitem' which is only used by the tabs that show up when logged in.
-                            console.log("Login Fail");
-                            this.ankiwebLogonStatus = "ERROR"
-                            callback(null); //return null to indicate connection failed.
-                        } else {
-                            console.log("Login Success");
-                            this.ankiwebLogonStatus = "OK"
-                            this.retrieveAnkiweb(callback); //return right answer of api_getVersion() to indicate success :-).
-                        }
-                    });
-            });
-        } else {
-            callback(1);
-        }
+        this.ankiweb.connect(this.options.ankiwebUsername, this.options.ankiwebPassword, callback);
     }
-
-    retrieveAnkiweb(callback) {
-        var currentXhr = $.get('https://ankiweb.net/edit/', (data, textStatus) => {
-            console.log("decks and models data loading");
-            if (textStatus == 'error') {
-                callback(null);
-            } else {
-                const models = jQuery.parseJSON(/editor\.models = (.*}]);/.exec(data)[1]); //[0] = the matching text, [1] = first capture group (what's inside parentheses)
-                const decks = jQuery.parseJSON(/editor\.decks = (.*}});/.exec(data)[1]);
-
-                var decknames = [];
-                for (let d in decks) {
-                    if (!(d == 1 && decks[d].mid == null && Object.keys(decks).length > 1)) {
-                        decknames.push(decks[d].name);
-                    }
-                }
-                decknames.sort();
-                this.ankiwebDecks = decknames;
-
-                var modelnames = [];
-                for (let m in models) {
-                    modelnames.push(models[m].name);
-                }
-                this.ankiwebModels = modelnames;
-                
-                var modelfieldnames = {};
-                for (let m in models) {
-                    var fieldnames = [];
-                    for (let f in models[m].flds) {
-                        fieldnames.push(models[m].flds[f].name);
-                    }
-                    modelfieldnames[models[m].name] = fieldnames;
-                }
-                this.ankiwebModelFields=modelfieldnames;
-                callback(1);
-            }
-        });
-    }
-
 }
 
 window.yomichan = new Yomichan();

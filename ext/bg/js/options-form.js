@@ -218,6 +218,23 @@ function onAnkiModelChanged(e) {
     }
 }
 
+function onAnkiwebClicked(e) {
+    if (!e.originalEvent && !e.isTrigger) {
+        return;
+    }
+
+    formToOptions('anki', (opts) => {
+        saveOptions(opts, () => {
+            yomichan().setOptions(opts);
+            yomichan().connectAnkiweb(result => {
+                yomichan().ankiwebConnected = result;
+                updateAnkiStatus();
+                populateAnkiDeckAndModel(opts);
+            });
+        });
+    });
+}
+
 $(document).ready(() => {
     loadOptions((opts) => {
         $('#scan-length').val(opts.scanLength);
@@ -238,6 +255,8 @@ $(document).ready(() => {
 
         $('.options-general input').change(onOptionsGeneralChanged);
         $('.options-anki input').change(onOptionsAnkiChanged);
+
+        $('#ankiweb-go').click(onAnkiwebClicked);
 
         $('.anki-deck').change(onOptionsAnkiChanged);
         $('.anki-model').change(onAnkiModelChanged);
