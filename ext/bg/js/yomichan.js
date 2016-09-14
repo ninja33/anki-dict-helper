@@ -204,12 +204,8 @@ class Yomichan {
     formatField(field, definition, mode) {
         const tags = [
             'audio',
-            'character',
             'expression',
             'glossary',
-            'glossary-list',
-            'kunyomi',
-            'onyomi',
             'reading',
             'sentence',
             'tags',
@@ -221,8 +217,6 @@ class Yomichan {
             switch (tag) {
                 case 'audio':
                     value = '';
-                    break;
-                case 'expression':
                     break;
                 case 'reading':
                     value = `${definition.reading.replace(/\//g,'')}`;
@@ -338,7 +332,7 @@ class Yomichan {
         if (this.options.enableAnkiConnect) {
             this.ankiInvoke('version', {}, null, callback);
         } else if (this.options.enableAnkiWeb) {
-            if (this.ankiwebConnected == true) {
+            if (this.ankiwebConnected) {
                 callback(1);
             } else {
                 callback(null);
