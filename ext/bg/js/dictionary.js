@@ -21,6 +21,7 @@ class Dictionary {
     constructor() {
         this.termDicts  = {};
         this.kanjiDicts = {};
+        this.formDict   = {};
     }
 
     addTermDict(name, dict) {
@@ -31,12 +32,19 @@ class Dictionary {
         this.kanjiDicts[name] = dict;
     }
 
+    addFormDict(dict) {
+        this.formDict = dict;
+    }
+
     findTerm(term) {
         let results = [];
 
         for (let name in this.termDicts) {
             const dict    = this.termDicts[name];
-            const indices = dict.indices[term] || [];
+            const indices = dict.indices[term] ||
+                            dict.indices[term.toLowerCase()] ||
+                            dict.indices[this.formDict[term]] ||
+                            [];
 
             results = results.concat(
                 indices.map(index => {
