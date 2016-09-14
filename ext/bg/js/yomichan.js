@@ -186,10 +186,16 @@ class Yomichan {
                 callback(this.ankiweb.modelfields[params['modelName']]);
                 break;
             case 'addNote':
-                callback(null);
+                this.ankiweb.save(params['note'],callback);
                 break;
             case 'canAddNotes':
-                callback(null);
+                var results = [];
+                if (this.ankiwebConnected) {
+                    params['notes'].forEach(()=>results.push(true));
+                } else {
+                    params['notes'].forEach(()=>results.push(false));
+                }
+                callback(results);
                 break;
         }
     }
@@ -217,15 +223,8 @@ class Yomichan {
                     value = '';
                     break;
                 case 'expression':
-                    if (mode === 'vocab_kana' && definition.reading) {
-                        value = definition.reading;
-                    }
                     break;
                 case 'reading':
-                    if (mode === 'vocab_kana') {
-                        value = null;
-                        break;
-                    }
                     value = `${definition.reading.replace(/\//g,'')}`;
                     break;
                 case 'glossary':
@@ -234,15 +233,6 @@ class Yomichan {
                         for (let gloss of definition.glossary) {
                             value += `${gloss}<br>`;
                         }
-                    }
-                    break;
-                case 'glossary-list':
-                    if (definition.glossary) {
-                        value = '<ol>';
-                        for (let gloss of definition.glossary) {
-                            value += `<li>${gloss}</li>`;
-                        }
-                        value += '</ol>';
                     }
                     break;
                 case 'tags':
@@ -266,30 +256,24 @@ class Yomichan {
         const note = {fields: {}, tags: this.options.ankiCardTags};
 
         let fields = [];
-        if (mode === 'kanji') {
-            fields         = this.options.ankiKanjiFields;
-            note.deckName  = this.options.ankiKanjiDeck;
-            note.modelName = this.options.ankiKanjiModel;
-        } else {
-            fields         = this.options.ankiVocabFields;
-            note.deckName  = this.options.ankiVocabDeck;
-            note.modelName = this.options.ankiVocabModel;
+        fields         = this.options.ankiVocabFields;
+        note.deckName  = this.options.ankiVocabDeck;
+        note.modelName = this.options.ankiVocabModel;
 
-            const audio = {
-                kanji:  definition.expression,
-                kana:   definition.reading,
-                fields: []
-            };
+        const audio = {
+            kanji:  definition.expression,
+            kana:   definition.reading,
+            fields: []
+        };
 
-            for (let name in fields) {
-                if (fields[name].indexOf('{audio}') !== -1) {
-                    audio.fields.push(name);
-                }
+        for (let name in fields) {
+            if (fields[name].indexOf('{audio}') !== -1) {
+                audio.fields.push(name);
             }
+        }
 
-            if (audio.fields.length > 0) {
-                note.audio = audio;
-            }
+        if (audio.fields.length > 0) {
+            note.audio = audio;
         }
 
         for (let name in fields) {

@@ -29,6 +29,7 @@ class Ankiweb {
         this.connected   = false;
         this.decks       = [];
         this.models      = [];
+        this.mids        = {};
         this.modelfields = {};
     }
 
@@ -75,10 +76,13 @@ class Ankiweb {
                 this.decks = decknames;
 
                 var modelnames = [];
+                var modelids = {};
                 for (let m in models) {
                     modelnames.push(models[m].name);
+                    modelids[models[m].name] = models[m].id;
                 }
                 this.models = modelnames;
+                this.mids = modelids;
                 
                 var modelfieldnames = {};
                 for (let m in models) {
@@ -97,20 +101,24 @@ class Ankiweb {
     }
 
     
-    save(data, callback){
-        var tags = localStorage["fieldTags"].replace(/,/g, ' ');
+    save(note, callback){
 
-        var data = [fields, tags];
+        var fields = [];
+        for (let f of this.modelfields[note.modelName]){
+            fields.push(note.fields[f])
+        }
+
+        var data = [fields, note.tags.join(' ')];
 
         var dict = {
             data: JSON.stringify(data),
-            mid: $("[name=model]").val(), //model id
-            deck: (returnDeck ? localStorage["currentDeck"] : $("[name=deck]").val())
+            mid: this.mids[note.modelName],
+            deck: note.deckName
         };
 
         var currentXhr = $.get(this.urls['save'], dict, (data, textStatus) => {
             if (textStatus == 'error') {
-                callback(false);
+                callback(null);
             }
             callback(true);
         });
