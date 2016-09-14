@@ -63,7 +63,7 @@ function api_setActionState({index, state, sequence}) {
     for (let mode in state) {
         const matches = document.querySelectorAll(`.action-bar[data-sequence="${sequence}"] .action-add-note[data-index="${index}"][data-mode="${mode}"]`);
         if (matches.length === 0) {
-            return;
+            continue;
         }
 
         const classes = matches[0].classList;

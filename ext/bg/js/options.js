@@ -22,26 +22,26 @@ function sanitizeOptions(options) {
         scanLength:          20,
         activateOnStartup:   false,
         selectMatchedText:   true,
+        showAdvancedOptions: false,
         loadEnamDict:        false,
         enableAudioPlayback: true,
+        disableAnkiOption:   true,
         enableAnkiConnect:   false,
-        ankiCardTags:        ['yomichan'],
+        enableAnkiWeb:       false,
+        ankiCardTags:        ['dict-helper'],
         sentenceExtent:      200,
         ankiVocabDeck:       '',
         ankiVocabModel:      '',
         ankiVocabFields:     {},
-        ankiKanjiDeck:       '',
-        ankiKanjiModel:      '',
-        ankiKanjiFields:     {}
+        ankiwebUsername:     '',
+        ankiwebPassword:     ''
     };
 
-    for (let key in defaults) {
-        if (!options.hasOwnProperty(key)) {
+    for (const key in defaults) {
+        if (!(key in options)) {
             options[key] = defaults[key];
         }
     }
-
-    options.scanLength = parseInt(options.scanLength);
 
     return options;
 }

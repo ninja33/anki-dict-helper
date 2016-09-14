@@ -101,7 +101,7 @@ class Client {
                 const sentence = Client.extractSentence(textSource, this.options.sentenceExtent);
                 definitions.forEach((definition) => {
                     definition.url = window.location.href;
-                    definition.sentence = sentence;
+                    definition.sentence = sentence.replace(definition.source,"<b>"+definition.source+"</b>");
                 });
 
                 const sequence = ++this.sequence;

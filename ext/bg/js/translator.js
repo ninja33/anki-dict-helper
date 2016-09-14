@@ -21,7 +21,7 @@ class Translator {
     constructor() {
         this.paths = {
             tags:     'bg/data/tags.json',
-            edict:    'bg/data/collins.json',
+            edict:    'bg/data/edict.json',
             enamdict: 'bg/data/enamdict.json',
             wordforms:'bg/data/wordforms.json'
         };
@@ -104,6 +104,14 @@ class Translator {
             if (sl1 > sl2) {
                 return -1;
             } else if (sl1 < sl2) {
+                return 1;
+            }
+
+            const el1 = v1.expression.length;
+            const el2 = v2.expression.length;
+            if (el1 > el2) {
+                return -1;
+            } else if (el1 < el2) {
                 return 1;
             }
 
