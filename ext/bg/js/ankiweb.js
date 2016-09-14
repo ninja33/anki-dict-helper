@@ -121,6 +121,7 @@ class Ankiweb {
                 callback(null);
             }
             callback(true);
+            console.log("save to ankiweb");
         });
     }
 
