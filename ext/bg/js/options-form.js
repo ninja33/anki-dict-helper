@@ -43,6 +43,7 @@ function modelIdToMarkers(id) {
             'reading',
             'glossary',
             'sentence',
+            'cloze',
             'url',
             'audio'
         ]

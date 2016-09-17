@@ -1,7 +1,7 @@
 ﻿{
     "manifest_version": 2,
     "name": "Anki划词制卡助手",
-    "version": "0.98",
+    "version": "0.98.2",
 
     "description": "划词翻译，一键制卡",
     "icons": {"16": "img/icon16.png", "48": "img/icon48.png", "128": "img/icon128.png"},

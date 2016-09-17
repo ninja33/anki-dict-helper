@@ -18,6 +18,10 @@
                 padding: 10px;
             }
 
+            .options-hidden {
+                display: none;
+            }
+
             .error-dlg {
                 display: none;
             }
@@ -29,7 +33,7 @@
                 <h4>通用选项</h4>
 
                 <form class="form-horizontal">
-                    <div class="form-group options-advanced">
+                    <div class="form-group options-hidden">
                         <label for="scan-length" class="control-label col-sm-2">Scan length</label>
                         <div class="col-sm-10"><input type="number" min="1" id="scan-length" class="form-control"></div>
                     </div>
@@ -42,7 +46,7 @@
                         </div>
                     </div>
 
-                    <div class="form-group options-advanced">
+                    <div class="form-group options-hidden">
                         <div class="col-sm-offset-2 col-sm-10">
                             <div class="checkbox">
                                 <label class="control-label"><input type="checkbox" id="load-enamdict"> Load <a href="http://www.edrdg.org/enamdict/enamdict_doc.html">ENAMDICT</a> (requires restart)</label>
@@ -80,7 +84,7 @@
                         </div>
                     </div>
 
-                    <div class="form-group options-advanced">
+                    <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
                             <div class="checkbox">
                                 <label class="control-label"><input type="checkbox" id="show-advanced-options"> 显示高级选项</label>
@@ -178,8 +182,10 @@
                                 <tr><td>单词</td><td><code>{expression}</code></td><td>音标</td><td><code>{reading}</code></td></tr>
                                 <tr><td>释义</td><td><code>{glossary}</code></td><td>例句</td><td><code>{sentence}</code></td></tr>
                                 <tr><td>网址</td><td><code>{url}</code></td><td>音频</td><td><code>{audio}</code></td></tr>
+                                <tr><td>填空</td><td><code>{cloze}</code></td><td></td><td></td></tr>
                                 </tbody>
                             </table>
+                            <p>*<code>{cloze}</code> 例句单词填空需使用Anki填空类型的模板</p>
                         </div>
                     </div>
                 </form>
