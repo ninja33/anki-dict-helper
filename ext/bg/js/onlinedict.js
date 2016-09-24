@@ -41,15 +41,7 @@ class Onlinedict {
                     if ("" + root.getElementsByTagName("translation")[0].childNodes[0] != "undefined") {
                         var translations = root.getElementsByTagName("translation");
                         for (var i = 0; i < translations.length-1; i++) {
-                            var line = translations[i].getElementsByTagName("content")[0].childNodes[0].nodeValue + "<br>";
-                            if (line.length > 50) {
-                                var reg = /[;；]/;
-                                var childs = line.split(reg);
-                                line = '';
-                                for (var i = 0; i < childs.length; i++) 
-                                    line += childs[i] + "<br>";
-                            }
-                            basetrans += line;
+                            basetrans = translations[i].getElementsByTagName("content")[0].childNodes[0].nodeValue + "<br>";
                         }
                         basetrans += translations[i].getElementsByTagName("content")[0].childNodes[0].nodeValue;
                         var {definitions, len} = params;
