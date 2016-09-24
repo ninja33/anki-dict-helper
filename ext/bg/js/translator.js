@@ -32,7 +32,7 @@ class Translator {
         this.deinflector = new Deinflector();
     }
 
-    loadData({loadEnamDict=true}, callback) {
+    loadData({loadEnamDict=false}, callback) {
         if (this.loaded) {
             callback();
             return;
