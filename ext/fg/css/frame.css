@@ -64,6 +64,10 @@ body {
 .tag-default {
     background-color: #8a8a91;
 }
+.tag-onlinedict {
+    background-color: #418ffe;
+}
+
 
 .tag-name {
     background-color: #5cb85c;

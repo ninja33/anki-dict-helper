@@ -35,6 +35,8 @@ class Yomichan {
 
         this.translator = new Translator();
         this.ankiweb = new Ankiweb();
+        this.onlinedict = new Onlinedict();
+        
         this.asyncPools = {};
         this.setState('disabled');
         this.ankiConnectVer = 0;
@@ -320,7 +322,13 @@ class Yomichan {
     }
 
     api_findTerm({text, callback}) {
-        callback(this.translator.findTerm(text));
+        var localdefs = this.translator.findTerm(text);
+        if (this.options.enableOnlineDict){
+           this.onlinedict.findTerm(text, localdefs, callback);
+        }
+        else {
+            callback(localdefs);
+        }
     }
 
     api_getDeckNames({callback}) {

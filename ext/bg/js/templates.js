@@ -126,7 +126,7 @@ templates['term.html'] = template({"1":function(container,depth0,helpers,partial
 },"4":function(container,depth0,helpers,partials,data,blockParams,depths) {
     var helper, alias1=container.escapeExpression;
 
-  return "        <a href=\"#\" title=\"Add term as expression\" class=\"action-add-note disabled\" data-mode=\"vocab_kanji\" data-index=\""
+  return "        <a href=\"#\" title=\"Add term to Anki PC\" class=\"action-add-note disabled\" data-mode=\"vocab_kanji\" data-index=\""
     + alias1(((helper = (helper = helpers.index || (data && data.index)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : {},{"name":"index","hash":{},"data":data}) : helper)))
     + "\"><img src=\""
     + alias1(container.lambda((depths[1] != null ? depths[1].root : depths[1]), depth0))
@@ -134,7 +134,7 @@ templates['term.html'] = template({"1":function(container,depth0,helpers,partial
 },"6":function(container,depth0,helpers,partials,data,blockParams,depths) {
     var helper, alias1=container.escapeExpression;
 
-  return "        <a href=\"#\" title=\"Add term as reading\" class=\"action-add-note disabled\" data-mode=\"vocab_kana\" data-index=\""
+  return "        <a href=\"#\" title=\"Add term as Anki Web\" class=\"action-add-note disabled\" data-mode=\"vocab_kana\" data-index=\""
     + alias1(((helper = (helper = helpers.index || (data && data.index)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : {},{"name":"index","hash":{},"data":data}) : helper)))
     + "\"><img src=\""
     + alias1(container.lambda((depths[1] != null ? depths[1].root : depths[1]), depth0))

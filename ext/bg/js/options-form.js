@@ -56,12 +56,10 @@ function formToOptions(section, callback) {
 
         switch (section) {
             case 'general':
-                optsNew.scanLength          = parseInt($('#scan-length').val());
                 optsNew.activateOnStartup   = $('#activate-on-startup').prop('checked');
-                optsNew.loadEnamDict        = $('#load-enamdict').prop('checked');
                 optsNew.selectMatchedText   = $('#select-matched-text').prop('checked');
-                optsNew.showAdvancedOptions = $('#show-advanced-options').prop('checked');
                 optsNew.enableAudioPlayback = $('#enable-audio-playback').prop('checked');
+                optsNew.enableOnlineDict    = $('#enable-online-dictionary').prop('checked');
                 optsNew.disableAnkiOption   = $('#disable-anki-option').prop('checked');
                 optsNew.enableAnkiConnect   = $('#enable-ankiconnect').prop('checked');
                 optsNew.enableAnkiWeb       = $('#enable-ankiweb').prop('checked');
@@ -238,12 +236,10 @@ function onAnkiwebClicked(e) {
 
 $(document).ready(() => {
     loadOptions((opts) => {
-        $('#scan-length').val(opts.scanLength);
         $('#activate-on-startup').prop('checked', opts.activateOnStartup);
-        $('#load-enamdict').prop('checked', opts.loadEnamDict);
         $('#select-matched-text').prop('checked', opts.selectMatchedText);
-        $('#show-advanced-options').prop('checked', opts.showAdvancedOptions);
         $('#enable-audio-playback').prop('checked', opts.enableAudioPlayback);
+        $('#enable-online-dictionary').prop('checked', opts.enableOnlineDict);
         $('#disable-anki-option').prop('checked', opts.disableAnkiOption);
         $('#enable-ankiconnect').prop('checked', opts.enableAnkiConnect);
         $('#enable-ankiweb').prop('checked', opts.enableAnkiWeb);
