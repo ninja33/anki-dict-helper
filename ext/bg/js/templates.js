@@ -8,14 +8,10 @@ templates['footer.html'] = template({"compiler":[7,">= 4.0.0"],"main":function(c
     + "/js/frame.js\"></script>\n    </body>\n</html>\n";
 },"useData":true});
 templates['header.html'] = template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    var helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
+    var helper;
 
-  return "<!DOCTYPE html>\n<html lang=\"en\">\n    <head>\n        <meta charset=\"UTF-8\">\n        <title></title>\n        <style>\n            @font-face {\n                font-family: kanji-stroke-orders;\n                src:         url('"
-    + alias4(((helper = (helper = helpers.root || (depth0 != null ? depth0.root : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"root","hash":{},"data":data}) : helper)))
-    + "/ttf/kanji-stroke-orders.ttf');\n            }\n            @font-face {\n                font-family: vl-gothic-regular;\n                src:         url('"
-    + alias4(((helper = (helper = helpers.root || (depth0 != null ? depth0.root : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"root","hash":{},"data":data}) : helper)))
-    + "/ttf/vl-gothic-regular.ttf');\n            }\n        </style>\n        <link rel=\"stylesheet\" href=\""
-    + alias4(((helper = (helper = helpers.root || (depth0 != null ? depth0.root : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"root","hash":{},"data":data}) : helper)))
+  return "<!DOCTYPE html>\n<html lang=\"zh-CN\">\n    <head>\n        <meta charset=\"UTF-8\">\n        <title></title>\n        <link rel=\"stylesheet\" href=\""
+    + container.escapeExpression(((helper = (helper = helpers.root || (depth0 != null ? depth0.root : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : {},{"name":"root","hash":{},"data":data}) : helper)))
     + "/css/frame.css\">\n    </head>\n    <body>\n";
 },"useData":true});
 templates['kanji-link.html'] = template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
@@ -126,7 +122,7 @@ templates['term.html'] = template({"1":function(container,depth0,helpers,partial
 },"4":function(container,depth0,helpers,partials,data,blockParams,depths) {
     var helper, alias1=container.escapeExpression;
 
-  return "        <a href=\"#\" title=\"Add term as expression\" class=\"action-add-note disabled\" data-mode=\"vocab_kanji\" data-index=\""
+  return "        <a href=\"#\" title=\"Add term to Anki PC\" class=\"action-add-note disabled\" data-mode=\"vocab_kanji\" data-index=\""
     + alias1(((helper = (helper = helpers.index || (data && data.index)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : {},{"name":"index","hash":{},"data":data}) : helper)))
     + "\"><img src=\""
     + alias1(container.lambda((depths[1] != null ? depths[1].root : depths[1]), depth0))
@@ -134,7 +130,7 @@ templates['term.html'] = template({"1":function(container,depth0,helpers,partial
 },"6":function(container,depth0,helpers,partials,data,blockParams,depths) {
     var helper, alias1=container.escapeExpression;
 
-  return "        <a href=\"#\" title=\"Add term as reading\" class=\"action-add-note disabled\" data-mode=\"vocab_kana\" data-index=\""
+  return "        <a href=\"#\" title=\"Add term to Anki Web\" class=\"action-add-note disabled\" data-mode=\"vocab_kana\" data-index=\""
     + alias1(((helper = (helper = helpers.index || (data && data.index)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : {},{"name":"index","hash":{},"data":data}) : helper)))
     + "\"><img src=\""
     + alias1(container.lambda((depths[1] != null ? depths[1].root : depths[1]), depth0))

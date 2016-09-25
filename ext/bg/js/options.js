@@ -19,12 +19,10 @@
 
 function sanitizeOptions(options) {
     const defaults = {
-        scanLength:          20,
         activateOnStartup:   false,
         selectMatchedText:   true,
-        showAdvancedOptions: false,
-        loadEnamDict:        false,
         enableAudioPlayback: true,
+        enableOnlineDict:    false,
         disableAnkiOption:   true,
         enableAnkiConnect:   false,
         enableAnkiWeb:       false,

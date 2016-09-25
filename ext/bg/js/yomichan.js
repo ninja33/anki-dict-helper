@@ -35,6 +35,8 @@ class Yomichan {
 
         this.translator = new Translator();
         this.ankiweb = new Ankiweb();
+        this.onlinedict = new Onlinedict();
+        
         this.asyncPools = {};
         this.setState('disabled');
         this.ankiConnectVer = 0;
@@ -59,7 +61,7 @@ class Yomichan {
 
     onInstalled(details) {
         if (details.reason === 'install') {
-            chrome.runtime.openOptionsPage();
+            chrome.tabs.create({url: chrome.extension.getURL('bg/guide.html')});
         }
     }
 
@@ -208,6 +210,7 @@ class Yomichan {
             'glossary',
             'reading',
             'sentence',
+            'cloze',
             'tags',
             'url',
         ];
@@ -228,6 +231,12 @@ class Yomichan {
                             value += `${gloss}<br>`;
                         }
                     }
+                    break;
+                case 'sentence':
+                    value = `${definition.sentence.replace(definition.source,"<b>"+definition.source+"</b>")}`;
+                    break;
+                case 'cloze':
+                    value = `${definition.sentence.replace(definition.source,"<b>{{c1::"+definition.source+"}}</b>")}`;
                     break;
                 case 'tags':
                     if (definition.tags) {
@@ -313,7 +322,13 @@ class Yomichan {
     }
 
     api_findTerm({text, callback}) {
-        callback(this.translator.findTerm(text));
+        var localdefs = this.translator.findTerm(text);
+        if (this.options.enableOnlineDict){
+           this.onlinedict.findTerm(text, localdefs, callback);
+        }
+        else {
+            callback(localdefs);
+        }
     }
 
     api_getDeckNames({callback}) {

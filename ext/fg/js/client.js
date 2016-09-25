@@ -46,13 +46,15 @@ class Client {
         }
     }
 
+    
     onMouseMove(e) {
         this.lastMousePos = {x: e.clientX, y: e.clientY};
         if (this.enabled && (e.shiftKey || e.which === this.activateBtn)) {
             this.searchAt(this.lastMousePos);
         }
     }
-
+    
+    
     onMouseDown(e) {
         this.lastMousePos = {x: e.clientX, y: e.clientY};
         if (this.enabled && (e.shiftKey || e.which === this.activateBtn)) {
@@ -101,7 +103,7 @@ class Client {
                 const sentence = Client.extractSentence(textSource, this.options.sentenceExtent);
                 definitions.forEach((definition) => {
                     definition.url = window.location.href;
-                    definition.sentence = sentence.replace(definition.source,"<b>"+definition.source+"</b>");
+                    definition.sentence = sentence;
                 });
 
                 const sequence = ++this.sequence;
