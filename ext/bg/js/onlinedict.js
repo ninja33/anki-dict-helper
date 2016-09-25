@@ -49,7 +49,7 @@ class Onlinedict {
                             class: 'onlinedict',
                             order: Number.MAX_SAFE_INTEGER,
                             desc:  'Online Dictionary',
-                            name:  'Online Dictionary'
+                            name:  'Youdao'
                         };
                         var onlinedef = {
                             expression: term,
