@@ -46,13 +46,15 @@ class Client {
         }
     }
 
+    
     onMouseMove(e) {
         this.lastMousePos = {x: e.clientX, y: e.clientY};
         if (this.enabled && (e.shiftKey || e.which === this.activateBtn)) {
             this.searchAt(this.lastMousePos);
         }
     }
-
+    
+    
     onMouseDown(e) {
         this.lastMousePos = {x: e.clientX, y: e.clientY};
         if (this.enabled && (e.shiftKey || e.which === this.activateBtn)) {
