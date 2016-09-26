@@ -30,8 +30,10 @@
     <body>
         <div class="container">
             <div class="options-general">
-                <h4>通用选项</h4>
-                <span class="label label-primary">一般选项</span>
+                <h4 class="col-sm-offset-2 col-sm-10">通用选项</h4>
+                <div class="col-sm-offset-2 col-sm-10">
+                    <lable class="label label-primary">一般选项</lable>
+                </div>
                 <form class="form-horizontal">
                     <div class="form-group form-group-sm">
                         <div class="col-sm-offset-2 col-sm-10">
@@ -51,9 +53,11 @@
                             </div>
                         </div>
                     </div>
-                </form>
-                <span class="label label-primary">Anki选项</span>
-                <form class="form-horizontal">
+
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <lable class="label label-primary">Anki选项</lable>
+                    </div>
+
                     <div class="form-group form-group-sm">
                         <div class="col-sm-offset-2 col-sm-10">
                             <div class="radio">
@@ -75,7 +79,7 @@
             
             <div class="options-anki">
 
-                <h4>Anki 连接选项</h4>
+                <h4 class="col-sm-offset-2 col-sm-10">Anki 连接选项</h4>
 
                 <div class="alert alert-danger error-dlg error-dlg-connection">
                     <strong>不能连接至(1)AnkiWeb网站 或者(2)Anki PC客户端</strong>: 请确保(1)互联网已连接至Ankiweb或者(2) <a href="https://ninja33.github.io/20160817/anki-connect/">AnkiConnect</a> 插件已经运行在 <a href="http://ankisrs.net/">Anki</a> PC客户端。
@@ -85,23 +89,17 @@
                     <strong>不支持的版本</strong>: 当前<a href="http://ankisrs.net/">Anki</a> PC客户端所安装的 <a href="https://ninja33.github.io/20160817/anki-connect/">AnkiConnect</a> 插件版本于制卡助手不兼容，请更新.
                 </div>
 
-
                 <form class="form-horizontal options-ankiweb">
                     <div class="form-group">
-                        <div class="col-sm-6">
-                            <lable class="label label-primary">登陆Ankiweb:</lable>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="col-sm-6">
+                        <div class="col-sm-offset-2 col-sm-10">
                             <div class="input-group">
                                 <span class="input-group-addon">Username</span>
                                 <input type="text" class="form-control" id="ankiweb-username" placeholder="username">
                             </div>
                         </div>
-                        <br>
-                        <div class="col-sm-6">
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
                             <div class="input-group">
                                 <span class="input-group-addon">Password</span>
                                 <input type="password" class="form-control" id="ankiweb-password" placeholder="password">
@@ -182,6 +180,7 @@
 
         <script src="../lib/jquery-2.2.2.min.js"></script>
         <script src="../lib/bootstrap-3.3.6-dist/js/bootstrap.min.js"></script>
+        <script src="js/polyfill-gecko.js"></script>
         <script src="js/options.js"></script>
         <script src="js/options-form.js"></script>
     </body>

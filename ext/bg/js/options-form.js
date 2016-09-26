@@ -138,7 +138,7 @@ function populateAnkiFields(element, opts) {
             button.attr('data-toggle', 'dropdown').dropdown();
 
             const markerItems = $('<ul>', {class: 'dropdown-menu dropdown-menu-right'});
-            for (const marker of markers) {
+            for (let marker of markers) {
                 const link = $('<a>', {href: '#'}).text(`{${marker}}`);
                 link.click((e) => {
                     e.preventDefault();
