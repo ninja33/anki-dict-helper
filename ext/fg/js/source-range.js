@@ -29,7 +29,7 @@ if (!document.caretRangeFromPoint){
         return range;
     };
 }
-
+ 
 class TextSourceRange {
     constructor(range) {
         this.rng = range;
