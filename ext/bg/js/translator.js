@@ -78,7 +78,7 @@ class Translator {
     findTerm(text) {
         const groups = {};
         
-        const segments = text.replace(/[^\w]/g,' ').trim().split(' ')
+        const segments = text.replace(/[^\u0030-\u024F]/g,' ').trim().split(' ')
 
         function isEmptyObject(obj) {
             return Object.keys(obj).length === 0;

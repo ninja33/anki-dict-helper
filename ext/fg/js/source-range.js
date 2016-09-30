@@ -51,7 +51,7 @@ class TextSourceRange {
             if(a.startContainer.data){
 
                 function isAlpha(a){
-                    return /\w/.test(a);
+                    return /[\u0030-\u024F]/.test(a);
                 }
 
                 function getStartPos(backward_count){

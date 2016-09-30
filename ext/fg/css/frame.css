@@ -111,7 +111,7 @@ body {
 }
 
 .term-word{
-	font-weight: 700;
+    font-weight: 700;
 }
 
 .term-expression {
@@ -132,7 +132,7 @@ body {
 
 .term-glossary {
     border-top:   2px #666 solid;
-	background-color: #f5f5f5;
+    background-color: #f5f5f5;
 }
 
 .term-glossary .text_blue{
@@ -146,21 +146,51 @@ body {
 }
 
 .term-glossary li {
-    color: #777;
-}
-
-.term-glossary li span {
     color: #000;
 }
 
+/*
+.term-glossary li span {
+    color: #000;
+}
+*/
+
 .term-glossary b{
-	font-weight:      normal;
+    font-weight:      normal;
     border-radius:    3px;
     color:            #fff;
-	background-color: #aaa;
-	padding-left:     3px;
-	padding-right:    3px;
+    background-color: #aaa;
+    padding-left:     3px;
+    padding-right:    3px;
 }
+
+
+/* dsl dict style styles */
+.dsl-darkblue{
+    color: darkblue;
+}
+.dsl-blue{
+    color: blue;
+}
+.dsl-darkgreen{
+    color: darkgreen;
+}
+.dsl-green{
+    color: green;
+}
+.dsl-red{
+    color: red;
+}
+.dsl-teal{
+    color: teal;
+}
+.dsl-purple{
+    color: purple;
+}
+.dsl-red{
+    color: red;
+}
+
 
 /* kanji styles */
 
