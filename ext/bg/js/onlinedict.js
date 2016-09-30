@@ -66,7 +66,7 @@ class Onlinedict {
                             rules:      [],
                             popular:    false
                         };
-                        definitions = [].concat(onlinedef, definitions);
+                        definitions = [].concat(definitions, onlinedef);
                         let length = 0;
                         for (let result of definitions) {
                             length = Math.max(length, result.source.length);
