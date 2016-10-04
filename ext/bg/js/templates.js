@@ -8,10 +8,14 @@ templates['footer.html'] = template({"compiler":[7,">= 4.0.0"],"main":function(c
     + "/js/frame.js\"></script>\n    </body>\n</html>\n";
 },"useData":true});
 templates['header.html'] = template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    var helper;
+    var helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
 
-  return "<!DOCTYPE html>\n<html lang=\"zh-CN\">\n    <head>\n        <meta charset=\"UTF-8\">\n        <title></title>\n        <link rel=\"stylesheet\" href=\""
-    + container.escapeExpression(((helper = (helper = helpers.root || (depth0 != null ? depth0.root : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : {},{"name":"root","hash":{},"data":data}) : helper)))
+  return "<!DOCTYPE html>\n<html lang=\"zh-CN\">\n    <head>\n        <meta charset=\"UTF-8\">\n        <title></title>\n        <style>\n            @font-face {\n                font-family : bookerly;\n                src         : url('"
+    + alias4(((helper = (helper = helpers.root || (depth0 != null ? depth0.root : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"root","hash":{},"data":data}) : helper)))
+    + "/ttf/bookerly-regular.ttf');\n            }\n            @font-face {\n                font-family : bookerly;\n                src         : url('"
+    + alias4(((helper = (helper = helpers.root || (depth0 != null ? depth0.root : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"root","hash":{},"data":data}) : helper)))
+    + "/ttf/bookerly-bold.ttf');\n                font-weight : bold;\n            }\n        </style>\n        <link rel=\"stylesheet\" href=\""
+    + alias4(((helper = (helper = helpers.root || (depth0 != null ? depth0.root : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"root","hash":{},"data":data}) : helper)))
     + "/css/frame.css\">\n    </head>\n    <body>\n";
 },"useData":true});
 templates['kanji-link.html'] = template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
@@ -102,77 +106,82 @@ templates['term-list.html'] = template({"1":function(container,depth0,helpers,pa
     + ((stack1 = container.invokePartial(partials["footer.html"],depth0,{"name":"footer.html","data":data,"helpers":helpers,"partials":partials,"decorators":container.decorators})) != null ? stack1 : "");
 },"usePartial":true,"useData":true,"useDepths":true});
 templates['term.html'] = template({"1":function(container,depth0,helpers,partials,data,blockParams,depths) {
-    var stack1, alias1=depth0 != null ? depth0 : {};
+    var stack1;
 
-  return "	<div class=\"action-bar\" data-sequence=\""
-    + container.escapeExpression(container.lambda((depths[1] != null ? depths[1].sequence : depths[1]), depth0))
-    + "\">\n"
-    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.enableAudioPlayback : depth0),{"name":"if","hash":{},"fn":container.program(2, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.enableAnkiConnect : depth0),{"name":"if","hash":{},"fn":container.program(4, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.enableAnkiWeb : depth0),{"name":"if","hash":{},"fn":container.program(6, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "	</div>\n";
+  return "        <div class=\"audio-bar\">\r\n"
+    + ((stack1 = helpers["if"].call(depth0 != null ? depth0 : {},(depth0 != null ? depth0.enableAudioPlayback : depth0),{"name":"if","hash":{},"fn":container.program(2, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "        </div>\r\n";
 },"2":function(container,depth0,helpers,partials,data,blockParams,depths) {
     var helper, alias1=container.escapeExpression;
 
-  return "		<a href=\"#\" title=\"Play audio\" class=\"action-play-audio\" data-index=\""
+  return "            <a href=\"#\" title=\"Play audio\" class=\"action-play-audio\" data-index=\""
     + alias1(((helper = (helper = helpers.index || (data && data.index)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : {},{"name":"index","hash":{},"data":data}) : helper)))
     + "\"><img src=\""
     + alias1(container.lambda((depths[1] != null ? depths[1].root : depths[1]), depth0))
-    + "/img/play_audio.png\"></a>\n";
-},"4":function(container,depth0,helpers,partials,data,blockParams,depths) {
-    var helper, alias1=container.escapeExpression;
-
-  return "        <a href=\"#\" title=\"Add term to Anki PC\" class=\"action-add-note disabled\" data-mode=\"vocab_kanji\" data-index=\""
-    + alias1(((helper = (helper = helpers.index || (data && data.index)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : {},{"name":"index","hash":{},"data":data}) : helper)))
-    + "\"><img src=\""
-    + alias1(container.lambda((depths[1] != null ? depths[1].root : depths[1]), depth0))
-    + "/img/add_vocab_kanji.png\"></a>\n";
-},"6":function(container,depth0,helpers,partials,data,blockParams,depths) {
-    var helper, alias1=container.escapeExpression;
-
-  return "        <a href=\"#\" title=\"Add term to Anki Web\" class=\"action-add-note disabled\" data-mode=\"vocab_kana\" data-index=\""
-    + alias1(((helper = (helper = helpers.index || (data && data.index)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : {},{"name":"index","hash":{},"data":data}) : helper)))
-    + "\"><img src=\""
-    + alias1(container.lambda((depths[1] != null ? depths[1].root : depths[1]), depth0))
-    + "/img/add_vocab_kana.png\"></a>\n";
-},"8":function(container,depth0,helpers,partials,data) {
+    + "/img/play_audio.png\"></a>\r\n";
+},"4":function(container,depth0,helpers,partials,data) {
     var helper;
 
-  return "		<span class=\"term-reading\">"
+  return "        <span class=\"term-reading\">"
     + container.escapeExpression(((helper = (helper = helpers.reading || (depth0 != null ? depth0.reading : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : {},{"name":"reading","hash":{},"data":data}) : helper)))
-    + "</span>\n";
-},"10":function(container,depth0,helpers,partials,data) {
+    + "</span>\r\n";
+},"6":function(container,depth0,helpers,partials,data) {
     var stack1;
 
-  return ((stack1 = helpers.each.call(depth0 != null ? depth0 : {},(depth0 != null ? depth0.tags : depth0),{"name":"each","hash":{},"fn":container.program(11, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "");
-},"11":function(container,depth0,helpers,partials,data) {
+  return ((stack1 = helpers.each.call(depth0 != null ? depth0 : {},(depth0 != null ? depth0.tags : depth0),{"name":"each","hash":{},"fn":container.program(7, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "");
+},"7":function(container,depth0,helpers,partials,data) {
     var helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
 
-  return "		<span class=\"tag tag-"
+  return "        <span class=\"tag tag-"
     + alias4(((helper = (helper = helpers["class"] || (depth0 != null ? depth0["class"] : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"class","hash":{},"data":data}) : helper)))
     + "\" title=\""
     + alias4(((helper = (helper = helpers.desc || (depth0 != null ? depth0.desc : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"desc","hash":{},"data":data}) : helper)))
     + "\">"
     + alias4(((helper = (helper = helpers.name || (depth0 != null ? depth0.name : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"name","hash":{},"data":data}) : helper)))
-    + "</span>\n";
-},"13":function(container,depth0,helpers,partials,data) {
-    var stack1;
+    + "</span>\r\n";
+},"9":function(container,depth0,helpers,partials,data,blockParams,depths) {
+    var stack1, alias1=container.lambda, alias2=depth0 != null ? depth0 : {};
 
-  return "            <li><span>"
-    + ((stack1 = container.lambda(depth0, depth0)) != null ? stack1 : "")
-    + "</span></li>\n";
+  return "            <li>\r\n                <div class=\"action-bar\" data-sequence=\""
+    + container.escapeExpression(alias1((depths[1] != null ? depths[1].sequence : depths[1]), depth0))
+    + "\">\r\n"
+    + ((stack1 = helpers["if"].call(alias2,((stack1 = (depths[1] != null ? depths[1].options : depths[1])) != null ? stack1.enableAnkiConnect : stack1),{"name":"if","hash":{},"fn":container.program(10, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ((stack1 = helpers["if"].call(alias2,((stack1 = (depths[1] != null ? depths[1].options : depths[1])) != null ? stack1.enableAnkiWeb : stack1),{"name":"if","hash":{},"fn":container.program(12, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "                </div>\r\n                "
+    + ((stack1 = alias1(depth0, depth0)) != null ? stack1 : "")
+    + "\r\n            </li>\r\n";
+},"10":function(container,depth0,helpers,partials,data,blockParams,depths) {
+    var helper, alias1=container.lambda, alias2=container.escapeExpression;
+
+  return "                    <a href=\"#\" title=\"Add term to Anki PC\" class=\"action-add-note disabled\" data-mode=\"vocab_kanji\" data-index=\""
+    + alias2(alias1((container.data(data, 1) && container.data(data, 1).index), depth0))
+    + "\" data-g-index=\""
+    + alias2(((helper = (helper = helpers.index || (data && data.index)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : {},{"name":"index","hash":{},"data":data}) : helper)))
+    + "\"><img src=\""
+    + alias2(alias1((depths[1] != null ? depths[1].root : depths[1]), depth0))
+    + "/img/add_vocab_kanji.png\"></a>\r\n";
+},"12":function(container,depth0,helpers,partials,data,blockParams,depths) {
+    var helper, alias1=container.lambda, alias2=container.escapeExpression;
+
+  return "                    <a href=\"#\" title=\"Add term to Anki Web\" class=\"action-add-note disabled\" data-mode=\"vocab_kana\" data-index=\""
+    + alias2(alias1((container.data(data, 1) && container.data(data, 1).index), depth0))
+    + "\" data-g-index=\""
+    + alias2(((helper = (helper = helpers.index || (data && data.index)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : {},{"name":"index","hash":{},"data":data}) : helper)))
+    + "\"><img src=\""
+    + alias2(alias1((depths[1] != null ? depths[1].root : depths[1]), depth0))
+    + "/img/add_vocab_kana.png\"></a>\r\n";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data,blockParams,depths) {
     var stack1, helper, alias1=depth0 != null ? depth0 : {};
 
-  return "<div class=\"term-definition\">\n"
+  return "<div class=\"term-definition\">\r\n\r\n    <div class=\"term-expression\">\r\n"
     + ((stack1 = helpers["with"].call(alias1,(depth0 != null ? depth0.options : depth0),{"name":"with","hash":{},"fn":container.program(1, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "\n    <div class=\"term-expression\">\n		<span class=\"term-word\">"
+    + "\r\n        <span class=\"term-word\">"
     + container.escapeExpression(((helper = (helper = helpers.expression || (depth0 != null ? depth0.expression : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(alias1,{"name":"expression","hash":{},"data":data}) : helper)))
-    + "</span>\n"
-    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.reading : depth0),{"name":"if","hash":{},"fn":container.program(8, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.tags : depth0),{"name":"if","hash":{},"fn":container.program(10, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "	</div>\n\n\n    <div class=\"term-glossary\">\n        <ul>\n"
-    + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.glossary : depth0),{"name":"each","hash":{},"fn":container.program(13, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "        </ul>\n    </div>\n</div>\n";
+    + "</span>\r\n"
+    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.reading : depth0),{"name":"if","hash":{},"fn":container.program(4, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.tags : depth0),{"name":"if","hash":{},"fn":container.program(6, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "    </div>\r\n\r\n\r\n    <div class=\"term-glossary\">\r\n        <ul>\r\n"
+    + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.glossary : depth0),{"name":"each","hash":{},"fn":container.program(9, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "        </ul>\r\n    </div>\r\n</div>\r\n";
 },"useData":true,"useDepths":true});
 })();

@@ -50,7 +50,7 @@ class Dictionary {
                 }
                 results = results.concat(
                     indices.map(index => {
-                        const [e, r, t, ...g] = dict.defs[index];
+                        const [e, r, t, g] = dict.defs[index];
                         const addons          = [];
                         const tags            = t.split(' ');
 

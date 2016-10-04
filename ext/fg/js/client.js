@@ -92,8 +92,8 @@ class Client {
         }
 
         //textSource.setEndOffset(this.options.scanLength);
-		textSource.setWordsOffset();
-		
+        textSource.setWordsOffset();
+        
         bgFindTerm(textSource.text(), ({definitions, length}) => {
             if (length === 0) {
                 this.hidePopup();
@@ -156,11 +156,11 @@ class Client {
         }
     }
 
-    api_addNote({index, mode}) {
+    api_addNote({index, g_index, mode}) {
         const state = {};
         state[mode] = false;
 
-        bgAddDefinition(this.definitions[index], mode, (success) => {
+        bgAddDefinition(this.definitions[index], g_index, mode, (success) => {
             if (success) {
                 this.popup.sendMessage('setActionState', {index, state, sequence: this.sequence});
             } else {
