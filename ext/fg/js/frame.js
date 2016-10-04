@@ -16,6 +16,47 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+function hackTagsColor() {
+    var colorMap = {
+        'n.'     : '#e3412f',
+        'a.'     : '#f8b002',
+        'adj.'   : '#f8b002',
+        'ad.'    : '#684b9d',
+        'adv.'   : '#684b9d',
+        'v.'     : '#539007',
+        'vi.'    : '#539007',
+        'vt.'    : '#539007',
+        'prep.'  : '#04B7C9',
+        'conj.'  : '#04B7C9',
+        'pron.'  : '#04B7C9',
+        'art.'   : '#04B7C9',
+        'num.'   : '#04B7C9',
+        'int.'   : '#04B7C9',
+        'interj.': '#04B7C9',
+        'modal.' : '#04B7C9',
+        'aux.'   : '#04B7C9',
+        'pl.'    : '#D111D3',
+        'abbr.'  : '#D111D3',
+        'CET4.'  : '#04B7C9',
+        'CET6.'  : '#04B7C9',
+        'TEM4.'  : '#04B7C9',
+        'TEM8.'  : '#04B7C9',
+        'GRE.'   : '#04B7C9',
+        'TOEFL.' : '#04B7C9',
+        'IELTS.' : '#D111D3',
+        '考研.'  : '#D111D3'
+    };
+    
+    [].forEach.call(document.querySelectorAll('.term-glossary'), function(div) {
+    div.innerHTML = div.innerHTML.replace(/\b[a-z]+\./g, function(symbol) {
+            if(colorMap[symbol]) {
+                return `<span class="highlight" style="background-color:${colorMap[symbol]}">${symbol}</span>`;
+            } else {
+                return symbol;
+            }
+        });
+    });    
+} 
 
 function registerKanjiLinks() {
     for (let link of [].slice.call(document.getElementsByClassName('kanji-link'))) {
@@ -50,6 +91,7 @@ function onDomContentLoaded() {
     registerKanjiLinks();
     registerAddNoteLinks();
     registerAudioLinks();
+    //hackTagsColor();
 }
 
 function onMessage(e) {
