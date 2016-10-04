@@ -42,6 +42,7 @@ function modelIdToMarkers(id) {
             'expression',
             'reading',
             'glossary',
+            'g-list',
             'sentence',
             'cloze',
             'url',

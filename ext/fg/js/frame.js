@@ -37,14 +37,7 @@ function hackTagsColor() {
         'aux.'   : '#04B7C9',
         'pl.'    : '#D111D3',
         'abbr.'  : '#D111D3',
-        'CET4.'  : '#04B7C9',
-        'CET6.'  : '#04B7C9',
-        'TEM4.'  : '#04B7C9',
-        'TEM8.'  : '#04B7C9',
-        'GRE.'   : '#04B7C9',
-        'TOEFL.' : '#04B7C9',
-        'IELTS.' : '#D111D3',
-        '考研.'  : '#D111D3'
+        'phrase.': '#8A8A91'
     };
     
     [].forEach.call(document.querySelectorAll('.term-glossary'), function(div) {
@@ -72,7 +65,7 @@ function registerAddNoteLinks() {
         link.addEventListener('click', (e) => {
             e.preventDefault();
             const ds = e.currentTarget.dataset;
-            window.parent.postMessage({action: 'addNote', params: {index: ds.index, mode: ds.mode}}, '*');
+            window.parent.postMessage({action: 'addNote', params: {index: ds.index, g_index: ds.gIndex, mode: ds.mode}}, '*');
         });
     }
 }
@@ -88,10 +81,10 @@ function registerAudioLinks() {
 }
 
 function onDomContentLoaded() {
+    hackTagsColor();
     registerKanjiLinks();
     registerAddNoteLinks();
     registerAudioLinks();
-    //hackTagsColor();
 }
 
 function onMessage(e) {
@@ -108,11 +101,13 @@ function api_setActionState({index, state, sequence}) {
             continue;
         }
 
-        const classes = matches[0].classList;
-        if (state[mode]) {
-            classes.remove('disabled');
-        } else {
-            classes.add('disabled');
+        for (const m of matches) {
+            const classes = m.classList;
+            if (state[mode]) {
+                classes.remove('disabled');
+            } else {
+                classes.add('disabled');
+            }
         }
     }
 }

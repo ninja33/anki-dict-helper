@@ -203,11 +203,12 @@ class Yomichan {
     }
 
     
-    formatField(field, definition, mode) {
+    formatField(field, definition, g_index, mode) {
         const tags = [
             'audio',
             'expression',
             'glossary',
+            'g-list',
             'reading',
             'sentence',
             'cloze',
@@ -225,10 +226,16 @@ class Yomichan {
                     value = `${definition.reading.replace(/\//g,'')}`;
                     break;
                 case 'glossary':
+                    value = '';
+                    if (definition.glossary[g_index]) {
+                        value = definition.glossary[g_index]
+                    }
+                    break;
+                case 'g-list':
                     if (definition.glossary) {
                         value = '';
                         for (let gloss of definition.glossary) {
-                            value += `${gloss}<br>`;
+                            value += `${gloss}<hr>`;
                         }
                     }
                     break;
@@ -255,7 +262,7 @@ class Yomichan {
         return field;
     }
 
-    formatNote(definition, mode) {
+    formatNote(definition, g_index, mode) {
         const note = {fields: {}, tags: this.options.ankiCardTags};
 
         let fields = [];
@@ -280,14 +287,14 @@ class Yomichan {
         }
 
         for (let name in fields) {
-            note.fields[name] = this.formatField(fields[name], definition, mode);
+            note.fields[name] = this.formatField(fields[name], definition, g_index, mode);
         }
 
         return note;
     }
 
-    api_addDefinition({definition, mode, callback}) {
-        const note = this.formatNote(definition, mode);
+    api_addDefinition({definition, g_index, mode, callback}) {
+        const note = this.formatNote(definition, g_index, mode);
         this.ankiInvokeSafe('addNote', {note}, null, callback);
     }
 
