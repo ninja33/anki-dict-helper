@@ -25,7 +25,6 @@ class Translator {
             part2:    'bg/data/edict/part2.json',
             part3:    'bg/data/edict/part3.json',
             part4:    'bg/data/edict/part4.json',
-            part5:    'bg/data/edict/part5.json',
             wordforms:'bg/data/wordforms.json'
         };
 
@@ -41,7 +40,7 @@ class Translator {
             return;
         }
 
-        let files = ['tags', 'wordforms', 'part1', 'part2', 'part3', 'part4', 'part5'];
+        let files = ['tags', 'wordforms', 'part1', 'part2', 'part3', 'part4'];
         if (loadEnamDict) {
             files = files.concat('enamdict');
         }
@@ -76,7 +75,6 @@ class Translator {
                     case 'part2':
                     case 'part3':
                     case 'part4':
-                    case 'part5':
                         this.dictionary.addTermDict(key, JSON.parse(response));
                         break;
                 }
