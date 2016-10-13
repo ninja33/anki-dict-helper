@@ -21,10 +21,16 @@ class Onlinedict {
         var terms = text.replace(/[^\w]/g,' ').trim().split(' ');
         var term = terms[0].trim();
 
-        var currentXhr = $.get(this.urls+term, (data, textStatus) => {
-            if (textStatus == 'error') {
+        $.ajax({
+            url     : this.urls+term,
+            type    : "GET",
+            timeout : 1000,
+            error   : (xhr,status,error) => {
+                console.log("onlinedict status : "+ status);
                 callback(params);
-            } else {
+            },
+            success : (data, status) => {
+                console.log("onlinedict status : "+ status);
                 var root = data.getElementsByTagName("yodaodict")[0];
 
                 var strpho = "";
@@ -60,7 +66,7 @@ class Onlinedict {
                             rules:      [],
                             popular:    false
                         };
-                        definitions = [].concat(onlinedef, definitions);
+                        definitions = [].concat(definitions, onlinedef);
                         let length = 0;
                         for (let result of definitions) {
                             length = Math.max(length, result.source.length);

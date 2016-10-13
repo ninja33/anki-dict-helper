@@ -21,20 +21,20 @@
 body {
     background-color: #fff;
     color:            #333;
-    font-family:      'open sans', arial, sans-serif;
-    font-size:        14px;
-    line-height:      1.42857143;
+    font-family:      Helvetica, Arial, sans-serif;
+    font-size:        12px;
+    line-height:      1.5;
     overflow-y:       auto;
-    margin:           8px;
+    margin:           6px;
 }
 
 
 .tag {
-    border-radius:  3px;
+    border-radius:  2px;
     color:          #fff;
     cursor:         default;
     display:        inline;
-    font-size:      12px;
+    font-size:      10px;
     font-weight:    normal;
     line-height:    1;
     padding:        0px 3px 0px 2px;
@@ -43,24 +43,6 @@ body {
     white-space:    nowrap;
 }
 
-.tag-n {
-    background-color: #e3412f;
-}
-.tag-adj {
-    background-color: #f8b002;
-}
-.tag-adv {
-    background-color: #684b9d;
-}
-.tag-vt {
-    background-color: #539007;
-}
-.tag-vi {
-    background-color: #539007;
-}
-.tag-v {
-    background-color: #539007;
-}
 .tag-default {
     background-color: #8a8a91;
 }
@@ -68,23 +50,12 @@ body {
     background-color: #418ffe;
 }
 
-
-.tag-name {
-    background-color: #5cb85c;
-}
-
-.tag-expression {
-    background-color: #f0ad4e;
-}
-
-.tag-popular {
-    background-color: #0275d8;
-}
-
+.audio-bar,
 .action-bar {
     float: right;
 }
 
+.audio-bar:after,
 .action-bar:after {
     clear:   both;
     content: '';
@@ -103,36 +74,38 @@ body {
 
 /* term styles */
 .term-definition{
+    font-family:  'open sans', arial, sans-serif;
     color: #111;
-    border-bottom:    1px solid #ddd;
     margin-top:       5px;
     background-color: #fff;
 
 }
 
-.term-word{
-	font-weight: 700;
-}
-
 .term-expression {
-    display:     inline-block;
-    font-size:   14px;
-    font-weight: normal;
+    margin:2px;
+    padding: 0 3px;
+    border-bottom:   2px #666 solid;
 }
 
 .term-expression a {
     text-decoration: none;
 }
 
+.term-word{
+    display:   inline-block;
+    font-size:   14px;
+    font-weight: bold;
+    font-weight: 700;
+}
+
 .term-reading {
+    font-family:  arial;
     color:     #777;
     display:   inline-block;
     font-size: 12px; 
 }
 
 .term-glossary {
-    border-top:   2px #666 solid;
-	background-color: #f5f5f5;
 }
 
 .term-glossary .text_blue{
@@ -146,20 +119,22 @@ body {
 }
 
 .term-glossary li {
-    color: #777;
-}
-
-.term-glossary li span {
+    display: block;
     color: #000;
+    background-color : #fefefe;
+    border           : 1px solid;               
+    border-color     : #e5e6e9 #dfe0e4 #d0d1d5; 
+    border-radius    : 3px;                    
+    padding: 5px;
+    margin-top:3px;
 }
 
-.term-glossary b{
-	font-weight:      normal;
-    border-radius:    3px;
-    color:            #fff;
-	background-color: #aaa;
-	padding-left:     3px;
-	padding-right:    3px;
+.term-glossary li .highlight{
+    font-size: 12px;
+    border-radius: 4px;
+    color:white;
+    padding:0 3px;
+    margin-right:5px;
 }
 
 /* kanji styles */
