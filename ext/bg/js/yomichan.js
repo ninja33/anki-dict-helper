@@ -33,6 +33,15 @@ class Yomichan {
             return result;
         });
 
+        Handlebars.registerHelper('escape', function(glossary) {
+            let result = '';
+            let glossary_items = glossary.split("<br>");
+            for (let g of glossary_items) {
+                result = result + Handlebars.Utils.escapeExpression(g) + "<br>";
+            }
+            return new Handlebars.SafeString(result);
+        });
+
         this.translator = new Translator();
         this.ankiweb = new Ankiweb();
         this.onlinedict = new Onlinedict();

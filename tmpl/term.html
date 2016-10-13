@@ -33,7 +33,7 @@
                     <a href="#" title="Add term to Anki Web" class="action-add-note disabled" data-mode="vocab_kana" data-index="{{@../index}}" data-g-index="{{@index}}"><img src="{{../root}}/img/add_vocab_kana.png"></a>
                     {{/if}}
                 </div>
-                {{{.}}}
+                {{escape .}}
             </li>
             {{/each}}
         </ul>

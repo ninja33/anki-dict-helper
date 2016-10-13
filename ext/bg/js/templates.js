@@ -136,15 +136,15 @@ templates['term.html'] = template({"1":function(container,depth0,helpers,partial
     + alias4(((helper = (helper = helpers.name || (depth0 != null ? depth0.name : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"name","hash":{},"data":data}) : helper)))
     + "</span>\r\n";
 },"9":function(container,depth0,helpers,partials,data,blockParams,depths) {
-    var stack1, alias1=container.lambda, alias2=depth0 != null ? depth0 : {};
+    var stack1, alias1=container.escapeExpression, alias2=depth0 != null ? depth0 : {};
 
   return "            <li>\r\n                <div class=\"action-bar\" data-sequence=\""
-    + container.escapeExpression(alias1((depths[1] != null ? depths[1].sequence : depths[1]), depth0))
+    + alias1(container.lambda((depths[1] != null ? depths[1].sequence : depths[1]), depth0))
     + "\">\r\n"
     + ((stack1 = helpers["if"].call(alias2,((stack1 = (depths[1] != null ? depths[1].options : depths[1])) != null ? stack1.enableAnkiConnect : stack1),{"name":"if","hash":{},"fn":container.program(10, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + ((stack1 = helpers["if"].call(alias2,((stack1 = (depths[1] != null ? depths[1].options : depths[1])) != null ? stack1.enableAnkiWeb : stack1),{"name":"if","hash":{},"fn":container.program(12, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "                </div>\r\n                "
-    + ((stack1 = alias1(depth0, depth0)) != null ? stack1 : "")
+    + alias1((helpers.escape || (depth0 && depth0.escape) || helpers.helperMissing).call(alias2,depth0,{"name":"escape","hash":{},"data":data}))
     + "\r\n            </li>\r\n";
 },"10":function(container,depth0,helpers,partials,data,blockParams,depths) {
     var helper, alias1=container.lambda, alias2=container.escapeExpression;
