@@ -1,7 +1,7 @@
 ﻿{
     "manifest_version": 2,
     "name": "Anki 划词制卡助手",
-    "version": "0.99.2",
+    "version": "0.99.3",
     "update_url": "https://clients2.google.com/service/update2/crx",
 
     "description": "划词翻译，一键制卡",
@@ -21,7 +21,7 @@
         ],
         "css": ["fg/css/client.css"]
     }],
-    "minimum_chrome_version": "45.0.0.0",
+    "minimum_chrome_version": "50.0.0.0",
     "options_ui": {
         "page": "bg/options.html"
     },
