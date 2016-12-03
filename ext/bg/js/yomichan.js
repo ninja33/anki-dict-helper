@@ -34,10 +34,10 @@ class Yomichan {
         });
 
         Handlebars.registerHelper('escape', function(glossary) {
-            glossary = Handlebars.Utils.escapeExpression(glossary);
-            glossary = glossary.replace(/&lt;br&gt;/g,"<br>");
-            glossary = glossary.replace(/&lt;b&gt;/g,"<b>");
-            glossary = glossary.replace(/&lt;\/b&gt;/g,"</b>");
+            //glossary = Handlebars.Utils.escapeExpression(glossary);
+            //glossary = glossary.replace(/&lt;br&gt;/g,"<br>");
+            //glossary = glossary.replace(/&lt;b&gt;/g,"<b>");
+            //glossary = glossary.replace(/&lt;\/b&gt;/g,"</b>");
             return new Handlebars.SafeString(glossary);
         });
 

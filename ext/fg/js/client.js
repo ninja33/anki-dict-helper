@@ -36,7 +36,6 @@ class Client {
         window.addEventListener('mousedown', this.onMouseDown.bind(this));
         window.addEventListener('mousemove', this.onMouseMove.bind(this));
         window.addEventListener('keydown', this.onKeyDown.bind(this));
-        //window.addEventListener('scroll', (e) => this.hidePopup());
         window.addEventListener('resize', (e) => this.hidePopup());
     }
 
