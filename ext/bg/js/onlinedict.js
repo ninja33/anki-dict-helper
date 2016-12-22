@@ -47,7 +47,7 @@ class Onlinedict {
                     if ("" + root.getElementsByTagName("translation")[0].childNodes[0] != "undefined") {
                         var translations = root.getElementsByTagName("translation");
                         for (var i = 0; i < translations.length-1; i++) {
-                            basetrans = translations[i].getElementsByTagName("content")[0].childNodes[0].nodeValue + "<br>";
+                            basetrans += translations[i].getElementsByTagName("content")[0].childNodes[0].nodeValue + "<br>";
                         }
                         basetrans += translations[i].getElementsByTagName("content")[0].childNodes[0].nodeValue;
                         var {definitions, len} = params;
