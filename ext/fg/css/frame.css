@@ -34,7 +34,7 @@ body {
     color:          #fff;
     cursor:         default;
     display:        inline;
-    font-size:      10px;
+    font-size: 12px;
     font-weight:    normal;
     line-height:    1;
     padding:        0px 3px 0px 2px;
@@ -45,6 +45,9 @@ body {
 
 .tag-default {
     background-color: #8a8a91;
+}
+.tag-wordstar{
+    color:            #fdac00;
 }
 .tag-onlinedict {
     background-color: #418ffe;
@@ -74,11 +77,9 @@ body {
 
 /* term styles */
 .term-definition{
-    font-family:  'open sans', arial, sans-serif;
-    color: #111;
+    font-family: Helvetica, Arial, sans-serif;
     margin-top:       5px;
     background-color: #fff;
-
 }
 
 .term-expression {
@@ -93,7 +94,7 @@ body {
 
 .term-word{
     display:   inline-block;
-    font-size:   14px;
+    font-size: 14px;
     font-weight: bold;
     font-weight: 700;
 }
