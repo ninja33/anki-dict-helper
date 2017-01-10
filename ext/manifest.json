@@ -1,8 +1,7 @@
-﻿{
+{
     "manifest_version": 2,
     "name": "Anki 划词制卡助手",
     "version": "0.99.4",
-    "update_url": "https://clients2.google.com/service/update2/crx",
 
     "description": "划词翻译，一键制卡",
     "icons": {"16": "img/icon16.png", "48": "img/icon48.png", "128": "img/icon128.png"},
@@ -33,5 +32,10 @@
         "fg/img/add_vocab_kanji.png",
         "fg/img/play_audio.png",
         "fg/js/frame.js"
-    ]
+    ],
+    "applications": {
+      "gecko": {
+        "id": "zhenyu.huang@qq.com"
+      }
+    }
 }

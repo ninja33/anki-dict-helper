@@ -64,10 +64,8 @@ class Popup {
 
         this.popup.contentWindow.scrollTo(0, 0);
         
-        const doc = this.popup.contentDocument;
-        doc.open();
-        doc.write(content);
-        doc.close();
+        const doc = this.popup;
+        doc.srcdoc=content;
     }
 
     sendMessage(action, params, callback) {
