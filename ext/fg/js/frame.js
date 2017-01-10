@@ -101,7 +101,7 @@ function api_setActionState({index, state, sequence}) {
             continue;
         }
 
-        for (let m of matches) {
+        for (let m of [].slice.call(matches)) {
             const classes = m.classList;
             if (state[mode]) {
                 classes.remove('disabled');

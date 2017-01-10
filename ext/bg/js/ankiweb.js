@@ -25,6 +25,19 @@ class Ankiweb {
         this.models      = [];
         this.mids        = {};
         this.modelfields = {};
+        
+        chrome.webRequest.onBeforeSendHeaders.addListener(
+            function(details) {
+                console.log(details);
+                details.requestHeaders.push({
+                    name: 'Origin',
+                    value: 'https://ankiweb.net'
+                });
+                return { requestHeaders: details.requestHeaders };
+            },
+            {urls: ['https://ankiweb.net/edit/save']},
+            ['blocking', 'requestHeaders']
+        );
     }
 
     connect(ankiwebID, ankiwebPassword, callback) {
@@ -108,13 +121,30 @@ class Ankiweb {
             deck: note.deckName
         };
 
-        var currentXhr = $.get(this.urls['save'], dict, (data, textStatus) => {
+        
+        var currentXhr = $.post(this.urls['save'], dict, (data, textStatus) => {
             if (textStatus == 'error') {
                 callback(null);
             }
             callback(true);
             console.log("save to ankiweb");
         });
+        
+        /*
+        $.ajax({
+            url:  this.urls['save'],
+            type: 'POST', 
+            beforeSend: function(xhr){
+                xhr.setRequestHeader('Referer', 'https://ankiweb.net/edit/');
+            },
+            data: dict,
+            success: function(){
+                callback(true);
+                console.log("saved to ankiweb");                
+            },
+            error: function(){callback(null);},
+        });
+        */
     }
 
     static connectAnkiweb(method, url, callback) {

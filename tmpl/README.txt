@@ -1,6 +1,6 @@
 Handlebars is semantic html templates.
 
-templates.js in xpi is pre-compiled Handlebars template output in js format
+/bg/js/templates.js in xpi is pre-compiled Handlebars template output in js format
 
 to reproduce templates.js, you need install Handlebars node.js package
 > npm install --save handlebars

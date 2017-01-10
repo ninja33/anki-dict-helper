@@ -1,7 +1,8 @@
 {
     "manifest_version": 2,
     "name": "Anki 划词制卡助手",
-    "version": "0.99.2",
+    "version": "0.99.4",
+
     "description": "划词翻译，一键制卡",
     "icons": {"16": "img/icon16.png", "48": "img/icon48.png", "128": "img/icon128.png"},
     "browser_action": {"default_icon": {"19": "img/icon19.png", "38": "img/icon38.png"}},
@@ -19,11 +20,11 @@
         ],
         "css": ["fg/css/client.css"]
     }],
-    "minimum_chrome_version": "45.0.0.0",
+    "minimum_chrome_version": "50.0.0.0",
     "options_ui": {
         "page": "bg/options.html"
     },
-    "permissions": ["file://*/*", "http://*/*", "https://*/*", "storage"],
+    "permissions": ["webRequest", "webRequestBlocking", "file://*/*", "http://*/*", "https://*/*", "storage"],
     "web_accessible_resources": [
         "fg/css/frame.css",
         "fg/img/add_kanji.png",

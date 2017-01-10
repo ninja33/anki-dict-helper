@@ -62,6 +62,8 @@ class Popup {
             return;
         }
 
+        this.popup.contentWindow.scrollTo(0, 0);
+        
         const doc = this.popup;
         doc.srcdoc=content;
     }
