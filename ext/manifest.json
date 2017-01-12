@@ -1,7 +1,7 @@
 ﻿{
     "manifest_version": 2,
     "name": "Anki 划词制卡助手",
-    "version": "0.99.5",
+    "version": "0.99.6",
     "update_url": "https://clients2.google.com/service/update2/crx",
 
     "description": "划词翻译，一键制卡",
@@ -25,7 +25,7 @@
     "options_ui": {
         "page": "bg/options.html"
     },
-    "permissions": ["webRequest", "webRequestBlocking", "file://*/*", "http://*/*", "https://*/*", "storage"],
+    "permissions": ["file://*/*", "http://*/*", "https://*/*", "storage"],
     "web_accessible_resources": [
         "fg/css/frame.css",
         "fg/img/add_kanji.png",
