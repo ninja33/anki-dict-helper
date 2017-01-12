@@ -26,11 +26,9 @@ class Onlinedict {
             type    : "GET",
             timeout : 1000,
             error   : (xhr,status,error) => {
-                console.log("onlinedict status : "+ status);
                 callback(params);
             },
             success : (data, status) => {
-                console.log("onlinedict status : "+ status);
                 var root = data.getElementsByTagName("yodaodict")[0];
 
                 var strpho = "";

@@ -34,7 +34,6 @@ class Ankiweb {
         return;
         
         var currentXhr = $.get(this.urls['logout'], (data, textStatus) => { //Start with logging any other user off.
-            console.log("Login to AnkiWeb");
             currentXhr = $.post(this.urls['login'], { //Submit user info
                     submitted  : "1",
                     csrf_token : $('input[name=csrf_token]', $(data)).val(),
@@ -43,11 +42,9 @@ class Ankiweb {
                 }, (data, textStatus) => {
                     const html = $(data);
                     if ($(".mitem", html).length == 0) { //Look for element with class 'mitem' which is only used by the tabs that show up when logged in.
-                        console.log("Login Fail");
                         this.connected = false;
                         callback(false); //return null to indicate connection failed.
                     } else {
-                        console.log("Login Success");
                         this.connected = true;
                         this.retrieve(callback); //return right answer of api_getVersion() to indicate success :-).
                     }
@@ -92,7 +89,6 @@ class Ankiweb {
                 }
                 this.modelfields = modelfieldnames;
                 this.connected = true;
-                console.log("decks & models data loaded success");
                 callback(true);
             }
         });
@@ -127,7 +123,6 @@ class Ankiweb {
                         callback(null);
                     }
                     callback(true);
-                    console.log("save to ankiweb");
                 });
             }
         });

@@ -68,10 +68,10 @@
                             </div>
                             <div class="radio" disabled>
                                 <label class="control-label" disabled><input type="radio" name="anki-option" id="enable-ankiweb" disabled> 启用 AnkiWeb</a></label>
-								<div class="alert alert-info alert-dismissible">
-									<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-									Ankiweb制卡暂不可用,请用ankiconnect替代。
-								</div>
+                                <div class="alert alert-info alert-dismissible">
+                                    <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                    Ankiweb制卡暂不可用,请用ankiconnect替代。
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -119,13 +119,17 @@
 
 
                     <div class="form-group">
-                        <label for="anki-card-tags" class="control-label col-sm-2">卡片标签</label>
-                        <div class="col-sm-10"><input type="text" id="anki-card-tags" class="form-control"></div>
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <label for="anki-card-tags" class="control-label">卡片标签</label>
+                            <input type="text" id="anki-card-tags" class="form-control">
+                        </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="sentence-extent" class="control-label col-sm-2">例句长度</label>
-                        <div class="col-sm-10"><input type="number" min="1" id="sentence-extent" class="form-control"></div>
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <label for="sentence-extent" class="control-label">例句长度</label>
+                            <input type="number" min="1" id="sentence-extent" class="form-control">
+                        </div>
                     </div>
 
                     <ul class="nav nav-tabs col-sm-offset-2 col-sm-10">
