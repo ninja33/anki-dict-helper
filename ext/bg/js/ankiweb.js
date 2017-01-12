@@ -25,7 +25,7 @@ class Ankiweb {
         this.models      = [];
         this.mids        = {};
         this.modelfields = {};
-        
+        /*
         chrome.webRequest.onBeforeSendHeaders.addListener(
             function(details) {
                 console.log(details);
@@ -35,12 +35,17 @@ class Ankiweb {
                 });
                 return { requestHeaders: details.requestHeaders };
             },
-            {urls: ['<all_urls>']},
+            {urls: ['*://ankiweb.net/*']},
             ['blocking', 'requestHeaders']
         );
+		*/
     }
 
     connect(ankiwebID, ankiwebPassword, callback) {
+		
+		callback(false); //temporarily disabled ankiweb interface.
+		return;
+		
         var currentXhr = $.get(this.urls['logout'], (data, textStatus) => { //Start with logging any other user off.
             console.log("Login to AnkiWeb");
             currentXhr = $.post(this.urls['login'], { //Submit user info
