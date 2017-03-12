@@ -171,7 +171,7 @@ class Client {
     api_playAudio(index) {
         const definition = this.definitions[index];
 
-        let url = `http://dict.youdao.com/dictvoice?audio=${encodeURIComponent(definition.expression)}`;
+        let url = `https://dict.youdao.com/dictvoice?audio=${encodeURIComponent(definition.expression)}`;
 
         for (let key in this.audio) {
             this.audio[key].pause();
