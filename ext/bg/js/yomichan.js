@@ -129,7 +129,7 @@ class Yomichan {
     }
 
     getApiVersion() {
-        return 1;
+        return 2;
     }
 
     tabInvokeAll(action, params) {
@@ -278,9 +278,11 @@ class Yomichan {
         note.deckName  = this.options.ankiVocabDeck;
         note.modelName = this.options.ankiVocabModel;
 
+        let headword = definition.expression;
         const audio = {
-            kanji:  definition.expression,
-            kana:   definition.reading,
+            url: `http://dict.youdao.com/dictvoice?audio=${encodeURIComponent(definition.expression)}`,
+            filename: `youdao-${encodeURIComponent(definition.expression)}.mp3`,
+            skipHash: '7e2c2f954ef6051373ba916f000168dc',
             fields: []
         };
 
