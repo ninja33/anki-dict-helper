@@ -1,28 +1,79 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-    <head>
-        <meta charset="UTF-8">
-        <title>anki划词助手使用说明</title>
-        <link rel="stylesheet" type="text/css" href="../lib/bootstrap-3.3.6-dist/css/bootstrap.min.css">
-        <link rel="stylesheet" type="text/css" href="../lib/bootstrap-3.3.6-dist/css/bootstrap-theme.min.css">
-    </head>
-    <body>
-        <div class="container">
 
-            <div class="page-header">
-                <h4>Anki划词制卡助手-使用说明</h4>
-            </div>
+<head>
+    <meta charset="UTF-8">
+    <title>anki划词助手使用说明</title>
+</head>
+<style>
+    .container {
+        font-family: "Segoe UI", Arial, "Microsoft Yahei", sans-serif;
+        font-size: 14px;
+        width: 380px;
+        height: 380px;
+        border-radius: 5px;
+        margin: 5px auto;
+        padding: 15px;
+        background: #fefefe;
+        border: 1px solid;
+        border-color: #e5e6e9 #dfe0e4 #d0d1d5;
+    }
 
-            <p>欢迎使用本插件，以下是插件简要说明，如需完整文档或插件最新信息，请访问<a href="https://ninja33.github.io/">作者主页</a>或者QQ群</p>
+    h3 {
+        margin: 0 auto 5px;
+        padding-bottom: 10px;
+        text-align: center;
+        border-bottom: 1px solid darkgrey;
+    }
 
-            <ol>
-                <li>左击<img src="../img/icon19.png" alt>图标可以禁用或者激活插件。</li>
-                <li>右击<img src="../img/icon19.png" alt>图标，然后选择<em>选项</em>可打开选项页，以进一步定制化插件。</li>
-                <li>按住键盘<kbd>Shift</kbd>键或者鼠标中键，可在当前鼠标光标处划词翻译。(页面须完全加载完成)</li>
-            </ol>
+    ol {
+        margin: 0;
+        padding: 5px 10px;
+    }
 
-            <p>作者:你家老黄(^_^)</p>
-            <p>QQ群:<span class="label label-primary">25091023</span></p>
-        </div>
-    </body>
+    li {
+        margin: 5px;
+    }
+
+    p {
+        margin: 5px auto;
+        line-height: 1.5em;
+    }
+
+    img {
+        border: 1px dashed darkgrey;
+        padding: 1px;
+        margin: 0 4px 0 3px;
+        vertical-align: baseline;
+    }
+
+    #notice {
+        color: blue;
+    }
+</style>
+
+<body>
+    <div class="container">
+        <h3>Anki划词制卡助手-使用说明</h3>
+        <p>欢迎使用本插件，以下是插件简要说明，如需完整文档或插件最新信息，请访问
+            <a href="http://www.laohuang.net/20160817/anki-dict-helper-chrome-extension/" target="_blank">插件教程</a>或者QQ群</p>
+        <ol>
+            <li>左击
+                <img src="../img/icon16.png" alt>图标可以
+                <b>"禁用"</b>或者
+                <b>"激活"</b>插件。</li>
+            <li>右击
+                <img src="../img/icon16.png" alt>图标，然后选择
+                <b>"选项"</b>可打开选项页，以进一步定制化插件。</li>
+            <li>按住键盘
+                <b>Shift</b>键或者鼠标中键，可在当前鼠标光标处划词翻译。(页面须完全加载完成)</li>
+        </ol>
+        <p id="notice">提示：版本0.99.8已全面兼容ankiconnect 1.0-5.0版本， 但ankiconnect官方版本不支持重复制卡。如使用官方版本，希望同一单词可重复制卡，请在ankiconnect.py文件中搜寻dupeOrEmpty字样的判重函数，该行前用#号注释掉即可。</p>
+        </p>
+        <p>
+            <br>作者: 你家老黄
+            <br>主页: <a href='http://www.laohuang.net' target="_blank">http://www.laohuang.net</a></p>
+    </div>
+</body>
+
 </html>

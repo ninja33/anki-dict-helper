@@ -1,7 +1,7 @@
 ﻿{
     "manifest_version": 2,
     "name": "Anki 划词制卡助手",
-    "version": "0.99.7",
+    "version": "0.99.8",
     "update_url": "https://clients2.google.com/service/update2/crx",
 
     "description": "划词翻译，一键制卡",
