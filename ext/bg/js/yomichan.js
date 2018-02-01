@@ -129,7 +129,7 @@ class Yomichan {
     }
 
     getApiVersion() {
-        return 2;
+        return 5;
     }
 
     tabInvokeAll(action, params) {
