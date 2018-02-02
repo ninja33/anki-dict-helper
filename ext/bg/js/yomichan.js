@@ -70,6 +70,8 @@ class Yomichan {
     onInstalled(details) {
         if (details.reason === 'install') {
             chrome.tabs.create({url: chrome.extension.getURL('bg/guide.html')});
+        } else if (details.reason === 'update') {
+            chrome.tabs.create({url: chrome.extension.getURL('bg/update.html')});
         }
     }
 
