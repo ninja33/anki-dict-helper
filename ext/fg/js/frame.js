@@ -112,5 +112,12 @@ function api_setActionState({index, state, sequence}) {
     }
 }
 
+function onMouseWheel(e){
+    document.querySelector('html').scrollTop -= e.wheelDeltaY / 3; 
+    e.preventDefault();
+}
+
 document.addEventListener('DOMContentLoaded', onDomContentLoaded, false);
 window.addEventListener('message', onMessage);
+window.addEventListener('wheel', onMouseWheel);
+
