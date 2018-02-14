@@ -47,7 +47,7 @@ class Yomichan {
         
         this.asyncPools = {};
         this.setState('disabled');
-        this.ankiConnectVer = 0;
+        this.ankiConnectVer = 5;
         this.ankiwebConnected = false;
 
         chrome.runtime.onInstalled.addListener(this.onInstalled.bind(this));
