@@ -39,12 +39,12 @@ class Popup {
         const popupRect = this.popup.getBoundingClientRect();
 
         let posX = elementRect.left;
-        if (posX + popupRect.width >= document.documentElement.clientWidth) {
-            posX = document.documentElement.clientWidth - popupRect.width;
+        if (posX + popupRect.width >= window.innerWidth) {
+            posX = window.innerWidth - popupRect.width;
         }
 
         let posY = elementRect.bottom + this.offset;
-        if (posY + popupRect.height >= document.documentElement.clientHeight) {
+        if (posY + popupRect.height >= window.innerHeight) {
             posY = elementRect.top - popupRect.height - this.offset;
         }
 
@@ -64,10 +64,8 @@ class Popup {
 
         this.popup.contentWindow.scrollTo(0, 0);
         
-        const doc = this.popup.contentDocument;
-        doc.open();
-        doc.write(content);
-        doc.close();
+        const doc = this.popup;
+        doc.srcdoc=content;
     }
 
     sendMessage(action, params, callback) {

@@ -110,9 +110,6 @@ function updateAnkiStatus() {
         if (version === null) {
             $('.error-dlg-connection').show();
             $('.options-anki-controls').hide();
-        } else if (version > yomichan().getApiVersion()) {
-            $('.error-dlg-version').show();
-            $('.options-anki-controls').hide();
         } else {
             $('.options-anki-controls').show();
         }
