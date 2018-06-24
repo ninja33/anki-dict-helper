@@ -42,13 +42,11 @@ class Yomichan {
         });
 
         this.translator = new Translator();
-        this.ankiweb = new Ankiweb();
         this.onlinedict = new Onlinedict();
         
         this.asyncPools = {};
         this.setState('disabled');
         this.ankiConnectVer = 5;
-        this.ankiwebConnected = false;
 
         chrome.runtime.onInstalled.addListener(this.onInstalled.bind(this));
         chrome.runtime.onMessage.addListener(this.onMessage.bind(this));
@@ -60,9 +58,6 @@ class Yomichan {
             this.setOptions(opts);
             if (this.options.activateOnStartup) {
                 this.setState('loading');
-            }
-            if (this.options.enableAnkiWeb) {
-                this.connectAnkiweb(result => this.ankiwebConnected = result);
             }
         });
     }
@@ -179,40 +174,11 @@ class Yomichan {
 
             xhr.open('POST', 'http://127.0.0.1:8765');
             xhr.send(JSON.stringify({action, params}));
-        } else if (this.options.enableAnkiWeb){
-            this.invokeAnkiweb(action, params, callback);            
         } else {
             callback(null);
         }
     }
 
-    invokeAnkiweb(action, params, callback) {
-        switch (action) {
-            case 'deckNames':
-                callback(this.ankiweb.decks);
-                break;
-            case 'modelNames':
-                callback(this.ankiweb.models);
-                break;
-            case 'modelFieldNames':
-                callback(this.ankiweb.modelfields[params['modelName']]);
-                break;
-            case 'addNote':
-                this.ankiweb.save(params['note'],callback);
-                break;
-            case 'canAddNotes':
-                var results = [];
-                if (this.ankiwebConnected) {
-                    params['notes'].forEach(()=>results.push(true));
-                } else {
-                    params['notes'].forEach(()=>results.push(false));
-                }
-                callback(results);
-                break;
-        }
-    }
-
-    
     formatField(field, definition, g_index, mode) {
         const tags = [
             'audio',
@@ -365,12 +331,6 @@ class Yomichan {
     api_getVersion({callback}) {
         if (this.options.enableAnkiConnect) {
             this.ankiInvoke('version', {}, null, callback);
-        } else if (this.options.enableAnkiWeb) {
-            if (this.ankiwebConnected) {
-                callback(1);
-            } else {
-                callback(null);
-            }
         } else {
             callback(null)
         }
@@ -380,9 +340,6 @@ class Yomichan {
         callback(Handlebars.templates[template](data));
     }
     
-    connectAnkiweb(callback) {
-        this.ankiweb.connect(this.options.ankiwebUsername, this.options.ankiwebPassword, callback);
-    }
 }
 
 window.yomichan = new Yomichan();

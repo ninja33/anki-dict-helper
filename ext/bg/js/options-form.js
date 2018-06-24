@@ -63,7 +63,6 @@ function formToOptions(section, callback) {
                 optsNew.enableOnlineDict    = $('#enable-online-dictionary').prop('checked');
                 optsNew.disableAnkiOption   = $('#disable-anki-option').prop('checked');
                 optsNew.enableAnkiConnect   = $('#enable-ankiconnect').prop('checked');
-                optsNew.enableAnkiWeb       = $('#enable-ankiweb').prop('checked');
                 break;
             case 'anki':
                 optsNew.ankiCardTags    = $('#anki-card-tags').val().split(/[,; ]+/);
@@ -71,8 +70,6 @@ function formToOptions(section, callback) {
                 optsNew.ankiVocabDeck   = $('#anki-vocab-deck').val();
                 optsNew.ankiVocabModel  = $('#anki-vocab-model').val();
                 optsNew.ankiVocabFields = fieldsToDict($('#vocab .anki-field-value'));
-                optsNew.ankiwebUsername = $('#ankiweb-username').val();;
-                optsNew.ankiwebPassword = $('#ankiweb-password').val();;
                 break;
         }
 
@@ -176,11 +173,6 @@ function onOptionsGeneralChanged(e) {
                 updateAnkiStatus();
                 populateAnkiDeckAndModel(optsNew);
                 $('.options-anki').show();
-                if (optsNew.enableAnkiWeb) {
-                    $('.options-ankiweb').show();
-                } else {
-                    $('.options-ankiweb').hide();
-                }
             } else {
                 $('.options-anki').hide();
             }
@@ -215,23 +207,6 @@ function onAnkiModelChanged(e) {
     }
 }
 
-function onAnkiwebClicked(e) {
-    if (!e.originalEvent && !e.isTrigger) {
-        return;
-    }
-
-    formToOptions('anki', (opts) => {
-        saveOptions(opts, () => {
-            yomichan().setOptions(opts);
-            yomichan().connectAnkiweb(result => {
-                yomichan().ankiwebConnected = result;
-                updateAnkiStatus();
-                populateAnkiDeckAndModel(opts);
-            });
-        });
-    });
-}
-
 $(document).ready(() => {
     loadOptions((opts) => {
         $('#activate-on-startup').prop('checked', opts.activateOnStartup);
@@ -251,8 +226,6 @@ $(document).ready(() => {
         $('.options-general input').change(onOptionsGeneralChanged);
         $('.options-anki input').change(onOptionsAnkiChanged);
 
-        $('#ankiweb-go').click(onAnkiwebClicked);
-
         $('.anki-deck').change(onOptionsAnkiChanged);
         $('.anki-model').change(onAnkiModelChanged);
 
@@ -264,11 +237,6 @@ $(document).ready(() => {
             updateAnkiStatus();
             populateAnkiDeckAndModel(opts);
             $('.options-anki').show();
-            if (opts.enableAnkiWeb) {
-                $('.options-ankiweb').show();
-            } else {
-                $('.options-ankiweb').hide();
-            }
         } else {
             $('.options-anki').hide();
         }

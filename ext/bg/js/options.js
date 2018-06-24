@@ -25,14 +25,11 @@ function sanitizeOptions(options) {
         enableOnlineDict:    false,
         disableAnkiOption:   true,
         enableAnkiConnect:   false,
-        enableAnkiWeb:       false,
         ankiCardTags:        ['dict-helper'],
         sentenceExtent:      200,
         ankiVocabDeck:       '',
         ankiVocabModel:      '',
         ankiVocabFields:     {},
-        ankiwebUsername:     '',
-        ankiwebPassword:     ''
     };
 
     for (let key in defaults) {
