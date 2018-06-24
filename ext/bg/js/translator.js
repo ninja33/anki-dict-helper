@@ -21,9 +21,12 @@ class Translator {
     constructor() {
         this.paths = {
             tags:     'bg/data/tags.json',
+            wordforms:'bg/data/wordforms.json',
             edict:    'bg/data/edict.json',
-            enamdict: 'bg/data/enamdict.json',
-            wordforms:'bg/data/wordforms.json'
+            part1:    'bg/data/edict/part1.json',
+            part2:    'bg/data/edict/part2.json',
+            part3:    'bg/data/edict/part3.json',
+            part4:    'bg/data/edict/part4.json',
         };
 
         this.loaded      = false;
@@ -38,30 +41,24 @@ class Translator {
             return;
         }
 
-        let files = ['tags', 'edict', 'wordforms'];
-        if (loadEnamDict) {
-            files = files.concat('enamdict');
-        }
+        let files = ['tags', 'wordforms', 'part1', 'part2', 'part3', 'part4'];
 
         const pendingLoads = [];
         for (let key of files) {
             pendingLoads.push(key);
             Translator.loadData(this.paths[key], (response) => {
                 switch (key) {
-                    case 'rules':
-                        this.deinflector.setRules(JSON.parse(response));
-                        break;
                     case 'tags':
                         this.tags = JSON.parse(response);
                         break;
                     case 'wordforms':
                         this.dictionary.addFormDict(JSON.parse(response));
                         break;
-                    case 'kanjidic':
-                        this.dictionary.addKanjiDict(key, JSON.parse(response));
-                        break;
                     case 'edict':
-                    case 'enamdict':
+                    case 'part1':
+                    case 'part2':
+                    case 'part3':
+                    case 'part4':
                         this.dictionary.addTermDict(key, JSON.parse(response));
                         break;
                 }
@@ -197,6 +194,7 @@ class Translator {
 
     static loadData(url, callback) {
         const xhr = new XMLHttpRequest();
+        xhr.overrideMimeType("application/json");
         xhr.addEventListener('load', () => callback(xhr.responseText));
         xhr.open('GET', chrome.extension.getURL(url), true);
         xhr.send();
