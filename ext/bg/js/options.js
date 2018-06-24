@@ -42,9 +42,9 @@ function sanitizeOptions(options) {
 }
 
 function loadOptions(callback) {
-    chrome.storage.sync.get(null, (items) => callback(sanitizeOptions(items)));
+    chrome.storage.local.get(null, (items) => callback(sanitizeOptions(items)));
 }
 
 function saveOptions(opts, callback) {
-    chrome.storage.sync.set(sanitizeOptions(opts), callback);
+    chrome.storage.local.set(sanitizeOptions(opts), callback);
 }

@@ -113,7 +113,14 @@ function api_setActionState({index, state, sequence}) {
 }
 
 function onMouseWheel(e){
-    document.querySelector('html').scrollTop -= e.wheelDeltaY / 3; 
+    let deltaY = 0;
+    if (e.deltaMode == 0){
+        deltaY = e.deltaY / 3;
+    }
+    if (e.deltaMode == 1){
+        deltaY = e.deltaY * 10;
+    }
+    document.querySelector('html').scrollTop += deltaY; 
     e.preventDefault();
 }
 
