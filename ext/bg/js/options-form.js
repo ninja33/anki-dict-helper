@@ -71,6 +71,18 @@ function formToOptions(section, callback) {
                 optsNew.ankiVocabModel  = $('#anki-vocab-model').val();
                 optsNew.ankiVocabFields = fieldsToDict($('#vocab .anki-field-value'));
                 break;
+            case 'ext':
+                let nodeNameStr = $("#node-name-black-list").val().trim(),
+                    nodeNameArr = [];
+                if (nodeNameStr) {
+                    nodeNameStr.split(/[\s+,]/).forEach(function (v) {
+                        if (v.trim()) {
+                            nodeNameArr.push(v.trim().toUpperCase());
+                        }
+                    })
+                }
+                optsNew.nodeNameBlackList = nodeNameArr;
+                break;
         }
 
         callback(sanitizeOptions(optsNew), sanitizeOptions(optsOld));
@@ -207,6 +219,14 @@ function onAnkiModelChanged(e) {
     }
 }
 
+function onSettingExtChanged(e) {
+    if (e.originalEvent) {
+        formToOptions('ext', (opts) => {
+            saveOptions(opts, () => yomichan().setOptions(opts));
+        });
+    }
+}
+
 $(document).ready(() => {
     loadOptions((opts) => {
         $('#activate-on-startup').prop('checked', opts.activateOnStartup);
@@ -223,8 +243,12 @@ $(document).ready(() => {
         $('#anki-card-tags').val(opts.ankiCardTags.join(' '));
         $('#sentence-extent').val(opts.sentenceExtent);
 
+        $('#node-name-black-list').val(opts.nodeNameBlackList.length ? opts.nodeNameBlackList.join(' ') : '');
+
+
         $('.options-general input').change(onOptionsGeneralChanged);
         $('.options-anki input').change(onOptionsAnkiChanged);
+        $('.setting-ext :input').change(onSettingExtChanged);
 
         $('.anki-deck').change(onOptionsAnkiChanged);
         $('.anki-model').change(onAnkiModelChanged);
@@ -242,5 +266,5 @@ $(document).ready(() => {
         }
 
 
-        });
+    });
 });

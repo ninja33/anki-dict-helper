@@ -147,6 +147,7 @@ class Client {
 
     api_setOptions(opts) {
         this.options = opts;
+        TextSourceRange.nodeNameBlackList = opts.nodeNameBlackList;
     }
 
     api_setEnabled(enabled) {

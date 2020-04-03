@@ -30,6 +30,7 @@ function sanitizeOptions(options) {
         ankiVocabDeck:       '',
         ankiVocabModel:      '',
         ankiVocabFields:     {},
+        nodeNameBlackList:   []
     };
 
     for (let key in defaults) {
