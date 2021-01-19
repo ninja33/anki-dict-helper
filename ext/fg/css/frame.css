@@ -22,8 +22,8 @@ body {
     background-color: #fff;
     color:            #333;
     font-family:      "Open Sans", Arial, sans-serif;
-    font-size:        12px;
-    line-height:      1.5;
+    font-size:        12px !important;
+    line-height:      1.5 !important;
     overflow-y:       auto;
     margin:           6px;
 }
