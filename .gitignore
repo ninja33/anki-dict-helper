@@ -1,6 +1,6 @@
 *.bat
 *.bak
 *.ttf
-ext/bg/data/
 doc/
 pkg/
+.idea

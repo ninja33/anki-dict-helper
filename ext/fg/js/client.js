@@ -115,7 +115,11 @@ class Client {
 
                         bgCanAddDefinitions(definitions, ['vocab_kanji', 'vocab_kana'], (states) => {
                             if (states !== null) {
-                                states.forEach((state, index) => this.popup.sendMessage('setActionState', {index, state, sequence}));
+                                states.forEach((state, index) => {
+                                    setTimeout(() => {
+                                        this.popup.sendMessage('setActionState', {index, state, sequence});
+                                    }, 100)
+                                });
                             }
                         });
                     }
@@ -147,6 +151,7 @@ class Client {
 
     api_setOptions(opts) {
         this.options = opts;
+        TextSourceRange.nodeNameBlackList = opts.nodeNameBlackList;
     }
 
     api_setEnabled(enabled) {

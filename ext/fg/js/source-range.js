@@ -31,6 +31,9 @@ if (!document.caretRangeFromPoint){
 }
 
 class TextSourceRange {
+
+    static nodeNameBlackList = [];
+
     constructor(range) {
         this.rng = range;
     }
@@ -200,6 +203,17 @@ class TextSourceRange {
     }
 
     static seekBackwardHelper(node, state) {
+        if (TextSourceRange.nodeNameBlackList.length && node && node.tagName) {
+            let pass = true;
+            TextSourceRange.nodeNameBlackList.forEach(function (nb) {
+                if (~node.tagName.indexOf(nb)) {
+                    pass = false;
+                }
+            });
+            if (!pass) {
+                return false;
+            }
+        }
         if (node.nodeType === 3) {
             const consumed = Math.min(node.length, state.length);
             state.node = node;
