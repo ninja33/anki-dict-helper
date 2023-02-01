@@ -73,7 +73,10 @@ function formToOptions(section, callback) {
                 break;
             case 'ext':
                 let nodeNameStr = $("#node-name-black-list").val().trim(),
-                    nodeNameArr = [];
+                    siteUrlStr = $('#site-url-black-list').val().trim(),
+                    nodeNameArr = [],
+                    blackSiteUrlArr = []
+                ;
                 if (nodeNameStr) {
                     nodeNameStr.split(/[\s+,]/).forEach(function (v) {
                         if (v.trim()) {
@@ -82,6 +85,16 @@ function formToOptions(section, callback) {
                     })
                 }
                 optsNew.nodeNameBlackList = nodeNameArr;
+
+                if (siteUrlStr) {
+                    siteUrlStr.split("\n").forEach(url => {
+                        url = url.trim()
+                        if (url) {
+                            blackSiteUrlArr.push(url)
+                        }
+                    })
+                }
+                optsNew.siteNameBlackList = blackSiteUrlArr;
                 break;
         }
 
@@ -228,7 +241,9 @@ function onSettingExtChanged(e) {
 }
 
 $(document).ready(() => {
+    console.log('document-ready')
     loadOptions((opts) => {
+        console.log('loadOptions-ok', opts)
         $('#activate-on-startup').prop('checked', opts.activateOnStartup);
         $('#select-matched-text').prop('checked', opts.selectMatchedText);
         $('#enable-audio-playback').prop('checked', opts.enableAudioPlayback);
@@ -244,6 +259,7 @@ $(document).ready(() => {
         $('#sentence-extent').val(opts.sentenceExtent);
 
         $('#node-name-black-list').val(opts.nodeNameBlackList.length ? opts.nodeNameBlackList.join(' ') : '');
+        $('#site-url-black-list').val(opts.siteNameBlackList.length ? opts.siteNameBlackList.join("\n") : '');
 
 
         $('.options-general input').change(onOptionsGeneralChanged);

@@ -152,6 +152,10 @@
                 <h4 class="col-sm-offset-2 col-sm-10">辅助功能</h4>
                 <form class="form-horizontal">
                     <div class="">
+                        <label for="site-url-black-list">站点黑名单</label>
+                        <textarea class="form-control" id="site-url-black-list" rows="3" spellcheck="false" placeholder="在已下的站点内默认禁用，一行一个可以正则，匹配站点URL"></textarea>
+                    </div>
+                    <div class="">
                         <label for="node-name-black-list">忽略节点名称列表</label>
                         <textarea class="form-control" id="node-name-black-list" rows="3" spellcheck="false" placeholder="插件在寻找例句（{sentence}）时会在一定字数范围内把相邻的节点包括进来，但有时会误包括一些节点，导致例句出现不想要的内容。
 比如安装了 Grammarly for Chrome 插件后有时候在例句中会加入一些不想出现的文字，此时我们可以在这里把 Grammarly 产生的 grammarly-extension 等节点名称的公共部分 grammarly- 写到这里，就会把避免这种问题。

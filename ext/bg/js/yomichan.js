@@ -47,12 +47,15 @@ class Yomichan {
         this.asyncPools = {};
         this.setState('disabled');
         this.ankiConnectVer = 5;
+        this.tabStateMap = {};
 
         chrome.runtime.onInstalled.addListener(this.onInstalled.bind(this));
         chrome.runtime.onMessage.addListener(this.onMessage.bind(this));
         chrome.browserAction.onClicked.addListener(this.onBrowserAction.bind(this));
-        chrome.tabs.onCreated.addListener((tab) => this.onTabReady(tab.id));
-        chrome.tabs.onUpdated.addListener(this.onTabReady.bind(this));
+        chrome.tabs.onCreated.addListener((tab) => this.onTabReady(tab, 'onCreated'));
+        chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => this.onTabReady(tab, 'onUpdated'));
+        chrome.tabs.onActivated.addListener((activeInfo) => this.onTabActive(activeInfo));
+        chrome.tabs.onRemoved.addListener((tabId) => this.onTabRemove(tabId));
 
         loadOptions((opts) => {
             this.setOptions(opts);
@@ -81,7 +84,41 @@ class Yomichan {
         return true;
     }
 
-    onTabReady(tabId) {
+    onTabRemove(tabId) {
+        if (this.tabStateMap[tabId]) {
+            delete this.tabStateMap[tabId];
+        }
+    }
+
+    onTabActive(activeInfo) {
+        let tabId = activeInfo.tabId;
+        if (this.state === 'enabled') {
+            chrome.browserAction.setBadgeText({
+                text: this.tabStateMap[tabId] ? 'off' : ''
+            });
+        } else if (this.state === 'disabled') {
+            
+        }
+    }
+
+    onTabReady(tab, otherData) {
+        let tabId = tab.id;
+        if (this.state === 'enabled' && tab.url && this.options.siteNameBlackList.length) {
+            let setDisabled = null
+            this.options.siteNameBlackList.forEach(function(url) {
+                if (new RegExp(url).test(tab.url)) {
+                    setDisabled = true
+                    return
+                }
+            })
+            if (setDisabled) {
+                this.tabInvoke(tabId, 'setOptions', this.options);
+                this.tabInvoke(tabId, 'setEnabled', false);
+                this.tabStateMap[tabId] = {'status': 'disabled'}
+                chrome.browserAction.setBadgeText({text: 'off'});
+                return
+            }
+        }
         this.tabInvoke(tabId, 'setOptions', this.options);
         this.tabInvoke(tabId, 'setEnabled', this.state === 'enabled');
     }
