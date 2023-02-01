@@ -85,6 +85,7 @@ class Yomichan {
     }
 
     onTabRemove(tabId) {
+        // console.log('onTabRemove', tabId)
         if (this.tabStateMap[tabId]) {
             delete this.tabStateMap[tabId];
         }
@@ -92,6 +93,7 @@ class Yomichan {
 
     onTabActive(activeInfo) {
         let tabId = activeInfo.tabId;
+        // console.log('onTabActive', tabId, this.state)
         if (this.state === 'enabled') {
             chrome.browserAction.setBadgeText({
                 text: this.tabStateMap[tabId] ? 'off' : ''
@@ -103,7 +105,8 @@ class Yomichan {
 
     onTabReady(tab, otherData) {
         let tabId = tab.id;
-        if (this.state === 'enabled' && tab.url && this.options.siteNameBlackList.length) {
+        // console.log('onTabReady', tabId, otherData, this.state)
+        if (this.state === 'enabled' && tab.url && this.options.siteNameBlackList.length && !this.tabStateMap[tabId]) {
             let setDisabled = null
             this.options.siteNameBlackList.forEach(function(url) {
                 if (new RegExp(url).test(tab.url)) {
