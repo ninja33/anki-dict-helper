@@ -105,8 +105,7 @@ class Yomichan {
 
     onTabReady(tab, otherData) {
         let tabId = tab.id;
-        // console.log('onTabReady', tabId, otherData, this.state)
-        if (this.state === 'enabled' && tab.url && this.options.siteNameBlackList.length && !this.tabStateMap[tabId]) {
+        if (this.state === 'enabled' && tab.url && this.options.siteNameBlackList.length && tab.active) {
             let setDisabled = null
             this.options.siteNameBlackList.forEach(function(url) {
                 if (new RegExp(url).test(tab.url)) {
@@ -122,8 +121,10 @@ class Yomichan {
                 return
             }
         }
-        this.tabInvoke(tabId, 'setOptions', this.options);
-        this.tabInvoke(tabId, 'setEnabled', this.state === 'enabled');
+        if (!this.tabStateMap[tabId]) {
+            this.tabInvoke(tabId, 'setOptions', this.options);
+            this.tabInvoke(tabId, 'setEnabled', this.state === 'enabled');
+        }
     }
 
     onBrowserAction() {
