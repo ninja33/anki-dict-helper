@@ -65,7 +65,17 @@ function registerAddNoteLinks() {
         link.addEventListener('click', (e) => {
             e.preventDefault();
             const ds = e.currentTarget.dataset;
-            window.parent.postMessage({action: 'addNote', params: {index: ds.index, g_index: ds.gIndex, mode: ds.mode}}, '*');
+            let sentence = '';
+            const elDefinition = e.currentTarget.closest('.term-definition');
+            if (elDefinition) {
+                const elInput = elDefinition.querySelector('.term-sentence input');
+                if (elInput && elInput.value) {
+                    sentence = elInput.value;
+                }
+            }
+            window.parent.postMessage({action: 'addNote', params: {
+                index: ds.index, g_index: ds.gIndex, mode: ds.mode, sentence: sentence
+            }}, '*');
         });
     }
 }

@@ -4,3 +4,5 @@
 doc/
 pkg/
 .idea
+node_modules
+temp

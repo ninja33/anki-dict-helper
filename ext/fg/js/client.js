@@ -160,10 +160,12 @@ class Client {
         }
     }
 
-    api_addNote({index, g_index, mode}) {
+    api_addNote({index, g_index, mode, sentence}) {
         const state = {};
         state[mode] = false;
-
+        if (sentence && this.definitions[index]['sentence']) {
+            this.definitions[index]['sentence'] = sentence
+        }
         bgAddDefinition(this.definitions[index], g_index, mode, (success) => {
             if (success) {
                 this.popup.sendMessage('setActionState', {index, state, sequence: this.sequence});

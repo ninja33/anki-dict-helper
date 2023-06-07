@@ -7,3 +7,6 @@ to reproduce templates.js, you need install Handlebars node.js package
 
 then run handlebars CLI in source directory.
 > handlebars footer.html header.html kanji-link.html kanji-list.html kanji.html term-list.html term.html -f templates.js
+
+> cd tmpl
+> npx handlebars footer.html header.html kanji-link.html kanji-list.html kanji.html term-list.html term.html -f ../ext/bg/js/templates.js

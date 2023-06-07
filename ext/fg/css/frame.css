@@ -138,6 +138,10 @@ body {
     margin-right:5px;
 }
 
+.term-sentence input {
+    width: 95%;
+}
+
 /* kanji styles */
 
 .kanji-glyph {
