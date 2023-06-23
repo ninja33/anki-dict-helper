@@ -66,9 +66,9 @@ function registerAddNoteLinks() {
             e.preventDefault();
             const ds = e.currentTarget.dataset;
             let sentence = '';
-            const elDefinition = e.currentTarget.closest('.term-definition');
+            const elDefinition = e.currentTarget.closest('body');
             if (elDefinition) {
-                const elInput = elDefinition.querySelector('.term-sentence input');
+                const elInput = elDefinition.querySelector('.term-sentence textarea')
                 if (elInput && elInput.value) {
                     sentence = elInput.value;
                 }
@@ -131,7 +131,7 @@ function onMouseWheel(e){
         deltaY = e.deltaY * 10;
     }
     document.querySelector('html').scrollTop += deltaY; 
-    e.preventDefault();
+    // e.preventDefault(); // VM262 frame.js:134  [Intervention] Unable to preventDefault inside passive event listener due to target being treated as passive. See https://www.chromestatus.com/feature/6662647093133312
 }
 
 document.addEventListener('DOMContentLoaded', onDomContentLoaded, false);

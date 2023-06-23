@@ -137,9 +137,12 @@ body {
     padding:0 3px;
     margin-right:5px;
 }
-
-.term-sentence input {
-    width: 95%;
+.term-sentence {
+    margin-top: 10px;
+}
+.term-sentence textarea {
+    width: 98%;
+    overflow: hidden;
 }
 
 /* kanji styles */

@@ -99,7 +99,12 @@ class Client {
             } else {
                 textSource.setEndOffset(length);
 
-                const sentence = Client.extractSentence(textSource, this.options.sentenceExtent);
+                let sentence = Client.extractSentence(textSource, this.options.sentenceExtent);
+                const elTmp = document.createElement('div');
+                elTmp.innerHTML = sentence;
+                sentence = (elTmp.textContent || elTmp.innerText || '').trim()
+                    .replace(/\s{2,}/g, ' ');
+
                 definitions.forEach((definition) => {
                     definition.url = window.location.href;
                     definition.sentence = sentence;
@@ -107,7 +112,7 @@ class Client {
 
                 const sequence = ++this.sequence;
                 bgRenderText(
-                    {definitions, root: this.fgRoot, options: this.options, sequence},
+                    {definitions, root: this.fgRoot, options: this.options, sequence, sentence},
                     'term-list.html',
                     (content) => {
                         this.definitions = definitions;

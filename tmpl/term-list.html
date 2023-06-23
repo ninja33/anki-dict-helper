@@ -1,4 +1,9 @@
 {{> header.html}}
+<div class="term-sentence">
+    <label>
+        <textarea rows="2">{{sentence}}</textarea>
+    </label>
+</div>
 {{#each definitions}}
 {{> term.html root=../root options=../options sequence=../sequence}}
 {{/each}}
