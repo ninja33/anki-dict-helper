@@ -1,0 +1,78 @@
+{
+    "★☆☆☆☆": {
+        "desc": "Word Stars",
+        "class":"wordstar"
+    },
+    "★★☆☆☆": {
+        "desc": "Word Stars",
+        "class":"wordstar"
+    },
+    "★★★☆☆": {
+        "desc": "Word Stars",
+        "class":"wordstar"
+    },
+    "★★★★☆": {
+        "desc": "Word Stars",
+        "class":"wordstar"
+    },
+    "★★★★★": {
+        "desc": "Word Stars",
+        "class":"wordstar"
+    },
+    "abbr.": {
+        "desc": "abbreviation",
+        "class":"n"
+    },
+    "adj.": {
+        "desc": "adjective",
+        "class": "adj"
+    },
+    "adv.": {
+        "desc": "adverb",
+        "class":"adv"
+    },
+    "conj.": {
+        "desc": "conjunction"
+    },
+    "exp.": {
+        "desc": "expressions"
+    },
+    "int.": {
+        "desc": "interjection"
+    },
+    "n.": {
+        "desc": "noun",
+        "class":"n"
+    },
+    "prep.": {
+        "desc": "prepostion"
+    },
+    "pron.": {
+        "desc": "pronoun"
+    },
+    "vi.": {
+        "desc": "intransitive verb",
+        "class":"v"
+    },
+    "vt.": {
+        "desc": "transitive verb",
+        "class":"v"
+    },
+    "v.": {
+        "desc": "verbs",
+        "class":"v"
+    },
+    "phrase.": {
+        "desc": "phrase"
+    },
+    "convention.": {
+        "desc": "convention"
+    },
+    "quest.": {
+        "desc": "quest"
+    },
+    "det.": {
+        "desc": "det"
+    }
+}
+

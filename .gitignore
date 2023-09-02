@@ -1,6 +1,8 @@
 *.bat
 *.bak
 *.ttf
-ext/bg/data/
 doc/
 pkg/
+.idea
+node_modules
+temp

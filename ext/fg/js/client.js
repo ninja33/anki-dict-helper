@@ -99,7 +99,12 @@ class Client {
             } else {
                 textSource.setEndOffset(length);
 
-                const sentence = Client.extractSentence(textSource, this.options.sentenceExtent);
+                let sentence = Client.extractSentence(textSource, this.options.sentenceExtent);
+                const elTmp = document.createElement('div');
+                elTmp.innerHTML = sentence;
+                sentence = (elTmp.textContent || elTmp.innerText || '').trim()
+                    .replace(/\s{2,}/g, ' ');
+
                 definitions.forEach((definition) => {
                     definition.url = window.location.href;
                     definition.sentence = sentence;
@@ -107,7 +112,7 @@ class Client {
 
                 const sequence = ++this.sequence;
                 bgRenderText(
-                    {definitions, root: this.fgRoot, options: this.options, sequence},
+                    {definitions, root: this.fgRoot, options: this.options, sequence, sentence},
                     'term-list.html',
                     (content) => {
                         this.definitions = definitions;
@@ -115,7 +120,11 @@ class Client {
 
                         bgCanAddDefinitions(definitions, ['vocab_kanji', 'vocab_kana'], (states) => {
                             if (states !== null) {
-                                states.forEach((state, index) => this.popup.sendMessage('setActionState', {index, state, sequence}));
+                                states.forEach((state, index) => {
+                                    setTimeout(() => {
+                                        this.popup.sendMessage('setActionState', {index, state, sequence});
+                                    }, 100)
+                                });
                             }
                         });
                     }
@@ -147,6 +156,7 @@ class Client {
 
     api_setOptions(opts) {
         this.options = opts;
+        TextSourceRange.nodeNameBlackList = opts.nodeNameBlackList;
     }
 
     api_setEnabled(enabled) {
@@ -155,10 +165,12 @@ class Client {
         }
     }
 
-    api_addNote({index, g_index, mode}) {
+    api_addNote({index, g_index, mode, sentence}) {
         const state = {};
         state[mode] = false;
-
+        if (sentence && this.definitions[index]['sentence']) {
+            this.definitions[index]['sentence'] = sentence
+        }
         bgAddDefinition(this.definitions[index], g_index, mode, (success) => {
             if (success) {
                 this.popup.sendMessage('setActionState', {index, state, sequence: this.sequence});

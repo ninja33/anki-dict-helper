@@ -1,0 +1,23 @@
+{
+  "name": "anki-dict-helper",
+  "version": "1.0.0",
+  "description": "This Project is no longer supported, please go to check my another project-[Online Dictionary Helper](https://github.com/ninja33/ODH)",
+  "main": "",
+  "dependencies": {
+    "handlebars": "^4.0.5"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nameldk/anki-dict-helper.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nameldk/anki-dict-helper/issues"
+  },
+  "homepage": "https://github.com/nameldk/anki-dict-helper#readme"
+}
